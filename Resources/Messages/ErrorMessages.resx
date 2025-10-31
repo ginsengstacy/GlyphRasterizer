@@ -121,8 +121,7 @@
     <value>Input cannot be empty.</value>
   </data>
   <data name="PathNotFound" xml:space="preserve">
-    <value>Spec
-	ied path does not exist.</value>
+    <value>Specified path does not exist.</value>
   </data>
   <data name="InvalidFileExtension" xml:space="preserve">
     <value>Invalid file extension.</value>

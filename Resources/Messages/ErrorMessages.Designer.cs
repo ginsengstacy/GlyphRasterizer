@@ -124,8 +124,7 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Spec
-        ///	ied path does not exist..
+        ///   Looks up a localized string similar to Specified path does not exist..
         /// </summary>
         public static string PathNotFound {
             get {

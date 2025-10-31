@@ -31,7 +31,7 @@ public sealed class CLI(
 {
     private static readonly string[] _imageFormatNames = Enum.GetNames<ImageFormat>();
 
-    public int Run(string[] args)
+    public void Run(string[] args)
     {
         var root = new RootCommand("GlyphRasterizer CLI");
 
@@ -98,8 +98,8 @@ public sealed class CLI(
             ImmutableList<ImageFormat>? formats = parseResult.GetValue(formatOpt);
 
             if (!glyphsParser.TryParse(
-                new GlyphParseContext(glyphInput, typeface), 
-                out ImmutableList<Glyph>? glyphs, 
+                new GlyphParseContext(glyphInput, typeface),
+                out ImmutableList<Glyph>? glyphs,
                 out string? errorMessage)
             )
             {
@@ -116,7 +116,7 @@ public sealed class CLI(
             }
         });
 
-        return root.Parse(args).Invoke();
+        root.Parse(args).Invoke();
     }
 
     private static TParseResult? ParseWith<TParseResult>(ArgumentResult result, IPromptInputParser<string, TParseResult?> parser)

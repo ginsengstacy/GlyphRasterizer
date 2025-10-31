@@ -34,13 +34,13 @@ public static class GlyphRenderer
         double offsetX = (targetSize - bounds.Width * scale) / 2 - bounds.X * scale;
         double offsetY = (targetSize - bounds.Height * scale) / 2 - bounds.Y * scale;
 
-        return new TransformGroup 
-        { 
-            Children = 
-            { 
-                new ScaleTransform(scale, scale), 
-                new TranslateTransform(offsetX, offsetY) 
-            } 
+        return new TransformGroup
+        {
+            Children =
+            {
+                new ScaleTransform(scale, scale),
+                new TranslateTransform(offsetX, offsetY)
+            }
         };
     }
 

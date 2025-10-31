@@ -6,7 +6,7 @@ namespace GlyphRasterizer;
 
 public static class Program
 {
-    static void Main(string[] args)
+    private static void Main(string[] args)
     {
         ServiceProvider provider = DependencyRoot.BuildServiceProvider();
 

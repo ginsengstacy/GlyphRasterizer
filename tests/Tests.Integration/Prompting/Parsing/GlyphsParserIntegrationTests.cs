@@ -58,11 +58,9 @@ public sealed class GlyphsParserIntegrationTests : ParserTestBase<GlyphsParser, 
         AssertParseFailure(new GlyphParseContext(input, _unifont), expectedMessage);
 
     [Fact]
-    public void TryParse_Should_ThrowNullReference_When_TypefaceIsNull()
-    {
-        var context = new GlyphParseContext("A", null);
-        Assert.Throws<NullReferenceException>(() => Parser.TryParse(context, out _, out _));
-    }
+    public void TryParse_Should_ThrowNullReference_When_TypefaceIsNull() =>
+        FluentActions.Invoking(() => Parser.TryParse(new GlyphParseContext("A", null), out _, out _))
+            .Should().Throw<NullReferenceException>();
 
     [Theory]
     [InlineData("A")]
@@ -134,9 +132,6 @@ public sealed class GlyphsParserIntegrationTests : ParserTestBase<GlyphsParser, 
 
     [Theory]
     [InlineData("A")]
-    public void TryParse_Should_ReturnTrue_When_InputConsistsOfThousandsOfGlyphs(string input)
-    {
-        var largeInput = new string(input[0], 10_000);
-        AssertParseSuccess(new GlyphParseContext(largeInput, _unifont), [new Glyph(input)]);
-    }
+    public void TryParse_Should_ReturnTrue_When_InputConsistsOfThousandsOfGlyphs(string input) =>
+        AssertParseSuccess(new GlyphParseContext(new string(input[0], 10_000), _unifont), [new Glyph(input)]);
 }

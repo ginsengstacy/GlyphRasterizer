@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 
 namespace GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormats;
 
-public sealed class ImageFormatsPrompt(ImageFormatsParser imageFormatsParser, PromptActionParser promptActionParser) 
+public sealed class ImageFormatsPrompt(ImageFormatsParser imageFormatsParser, PromptActionParser promptActionParser)
     : PromptBase<string, ImmutableList<ImageFormat>?>(promptActionParser)
 {
     private static readonly string[] _imageFormatNames = Enum.GetNames<ImageFormat>();

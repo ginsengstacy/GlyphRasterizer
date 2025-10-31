@@ -1,6 +1,6 @@
-﻿using System.IO;
-using FluentAssertions;
+﻿using FluentAssertions;
 using GlyphRasterizer.BitmapEncoders;
+using System.IO;
 
 namespace Tests.Unit.BitmapEncoders;
 
@@ -11,7 +11,8 @@ public class IcoBitmapEncoderUnitTests
     {
         var encoder = new IcoBitmapEncoder();
         using var stream = new MemoryStream();
-        Action action = () => encoder.Save(stream);
-        action.Should().Throw<NotSupportedException>();
+
+        FluentActions.Invoking(() => encoder.Save(stream))
+            .Should().Throw<NotSupportedException>();
     }
 }

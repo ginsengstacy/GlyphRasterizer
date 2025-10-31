@@ -27,11 +27,11 @@ public sealed class StringExtensionUnitTests
 
     [Fact]
     public void MatchesFormat_Should_ThrowNullReference_When_ActualIsNull() =>
-        ((Action)(() => ((string?)null)!.MatchesFormat("format")))
+        FluentActions.Invoking(() => ((string?)null)!.MatchesFormat("format"))
             .Should().Throw<NullReferenceException>();
 
     [Fact]
     public void MatchesFormat_Should_ThrowArgumentNull_When_FormatIsNull() =>
-        ((Action)(() => "actual".MatchesFormat(null!)))
+        FluentActions.Invoking(() => "actual".MatchesFormat(null!))
             .Should().Throw<ArgumentNullException>();
 }

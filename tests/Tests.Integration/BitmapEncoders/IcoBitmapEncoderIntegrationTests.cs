@@ -1,8 +1,8 @@
-﻿using System.IO;
-using System.Windows.Media.Imaging;
-using FluentAssertions;
+﻿using FluentAssertions;
 using GlyphRasterizer.BitmapEncoders;
+using System.IO;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Tests.Integration.BitmapEncoders;
 

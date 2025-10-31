@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace GlyphRasterizer.Prompting.Prompts.InputType.String.Glyphs;
 
-public sealed class GlyphsPrompt(GlyphsParser glyphsParser, PromptActionParser promptActionParser) 
+public sealed class GlyphsPrompt(GlyphsParser glyphsParser, PromptActionParser promptActionParser)
     : PromptBase<GlyphParseContext, ImmutableList<Glyph>?>(promptActionParser)
 {
     public GlyphTypeface? CurrentTypeface;

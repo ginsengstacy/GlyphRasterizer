@@ -43,7 +43,15 @@ public sealed class GlyphTypefaceParserIntegrationTests : ParserTestBase<GlyphTy
         finally
         {
             if (File.Exists(tmpPath))
-                try { File.Delete(tmpPath); } catch { };
+            {
+                try 
+                { 
+                    File.Delete(tmpPath); 
+                } 
+                catch 
+                { 
+                };
+            }
         }
     }
 }

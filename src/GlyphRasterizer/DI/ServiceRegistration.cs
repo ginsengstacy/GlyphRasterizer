@@ -22,7 +22,6 @@ public static class ServiceRegistration
             .AddCoreServices()
             .AddPromptingSubsystem()
             .AddIoSubsystem();
-
         return services;
     }
 

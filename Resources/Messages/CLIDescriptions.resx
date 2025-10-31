@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Color" xml:space="preserve">
-    <value>Color as name (e.g., Red) or hex (e.g., #FF0000).</value>
+    <value>Color as name (e.g., Red) or hexadecimal code (e.g., #FF0000).</value>
   </data>
   <data name="FontPath_FormatString" xml:space="preserve">
     <value>Font file (e.g., C:\Users\Alice\Fonts\Arial.ttf). Available: {0}.</value>

@@ -61,7 +61,7 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter color as name (e.g., Red) or hex (e.g., #FF0000):.
+        ///   Looks up a localized string similar to Enter color as name (e.g., Red) or hexadecimal code (e.g., #FF0000):.
         /// </summary>
         public static string Color {
             get {
@@ -88,7 +88,7 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter glyph(s). Can be a single character (e.g., A) or multiple (e.g., ABC).{0}Glyph(s):.
+        ///   Looks up a localized string similar to Enter glyph(s): single (e.g., A) or multiple (e.g., ABC).{0}Glyph(s):.
         /// </summary>
         public static string Glyphs_FormatString {
             get {
@@ -97,7 +97,7 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter format(s). Can be a single format (e.g., {0}), multiple (e.g., {0}, {1}), or &apos;All&apos;. Available: {2}.{3}Format(s):.
+        ///   Looks up a localized string similar to Enter format(s): single (e.g., {0}), multiple (e.g., {0}, {1}), or &apos;All&apos;. Options: {2}.{3}Format(s):.
         /// </summary>
         public static string ImageFormats_FormatString {
             get {

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Color" xml:space="preserve">
-    <value>Enter color as name (e.g., Red) or hex (e.g., #FF0000):</value>
+    <value>Enter color as name (e.g., Red) or hexadecimal code (e.g., #FF0000):</value>
   </data>
   <data name="FileAlreadyExists_FormatString" xml:space="preserve">
     <value>{0} already exists. Overwrite? (Y/N, Ctrl+Y = yes to all, Ctrl+N = no to all)</value>
@@ -128,11 +128,11 @@
     <comment>1 = \n</comment>
   </data>
   <data name="Glyphs_FormatString" xml:space="preserve">
-    <value>Enter glyph(s). Can be a single character (e.g., A) or multiple (e.g., ABC).{0}Glyph(s):</value>
+    <value>Enter glyph(s): single (e.g., A) or multiple (e.g., ABC).{0}Glyph(s):</value>
     <comment>0 = \n</comment>
   </data>
   <data name="ImageFormats_FormatString" xml:space="preserve">
-    <value>Enter format(s). Can be a single format (e.g., {0}), multiple (e.g., {0}, {1}), or 'All'. Available: {2}.{3}Format(s):</value>
+    <value>Enter format(s): single (e.g., {0}), multiple (e.g., {0}, {1}), or 'All'. Options: {2}.{3}Format(s):</value>
     <comment>3 = \n</comment>
   </data>
   <data name="OutputDirectory" xml:space="preserve">

@@ -61,7 +61,7 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Color as name (e.g., Red) or hex (e.g., #FF0000)..
+        ///   Looks up a localized string similar to Color as name (e.g., Red) or hexadecimal code (e.g., #FF0000)..
         /// </summary>
         public static string Color {
             get {

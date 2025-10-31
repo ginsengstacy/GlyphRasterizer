@@ -102,7 +102,7 @@ During an interactive session, you can enter the following commands at any promp
 
 ### Example Session
 
-<img width="1138" height="446" alt="Screenshot 2025-10-31 051056" src="https://github.com/user-attachments/assets/b21b3fdc-5fe6-472c-9f21-d7ee71d2af2c" />
+<img width="1056" height="445" alt="Screenshot 2025-10-31 063515" src="https://github.com/user-attachments/assets/b48a4bb4-b9b3-435b-947a-1640a1251d93" />
 
 ## Notes
 

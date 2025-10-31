@@ -103,7 +103,3 @@ During an interactive session, you can enter the following commands at any promp
 ### Example Session
 
 <img width="1056" height="445" alt="Screenshot 2025-10-31 063515" src="https://github.com/user-attachments/assets/b48a4bb4-b9b3-435b-947a-1640a1251d93" />
-
-## Notes
-
-* The tool asks to overwrite existing files in the output directory if names conflict.

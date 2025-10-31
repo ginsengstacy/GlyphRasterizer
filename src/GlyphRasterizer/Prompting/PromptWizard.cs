@@ -28,7 +28,9 @@ public sealed class PromptWizard(SessionContextFactory sessionContextFactory)
             }
 
             if (currentPrompt is GlyphsPrompt glyphsPrompt)
-                glyphsPrompt.SetSessionContext(currentContext);
+            {
+                glyphsPrompt.CurrentTypeface = currentContext.GlyphTypeface;
+            }
 
             Console.Write($"[{i + 1}/{totalSteps}] ");
             PromptResult promptResult = currentPrompt.Execute();

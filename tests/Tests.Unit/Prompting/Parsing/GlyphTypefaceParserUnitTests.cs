@@ -11,10 +11,10 @@ public sealed class GlyphTypefaceParserUnitTests : ParserTestBase<GlyphTypefaceP
 {
     protected override GlyphTypefaceParser Parser => new();
 
-    private readonly static string _invalidFilePath = Path.GetRandomFileName();
-    private readonly static string _invalidFilePathWithoutExtension = Path.GetFileNameWithoutExtension(_invalidFilePath);
-    private readonly static string _validFontExtension = FontFormatDataLookup.Lookup.Values.First().Extension;
-    private readonly static string _invalidFilePathWithValidExtension = _invalidFilePathWithoutExtension + _validFontExtension;
+    private static readonly string _invalidFilePath = Path.GetRandomFileName();
+    private static readonly string _invalidFilePathWithoutExtension = Path.GetFileNameWithoutExtension(_invalidFilePath);
+    private static readonly string _validFontExtension = FontFormatDataLookup.Lookup.Values.First().Extension;
+    private static readonly string _invalidFilePathWithValidExtension = _invalidFilePathWithoutExtension + _validFontExtension;
 
     [Theory]
     [MemberData(nameof(EmptyStringInput))]

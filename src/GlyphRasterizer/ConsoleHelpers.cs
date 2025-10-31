@@ -4,20 +4,24 @@ internal static class ConsoleHelpers
 {
     private static readonly bool ColorsAreSupported = GetColorsAreSupported();
 
-    private static bool GetColorsAreSupported()
-        => !(OperatingSystem.IsBrowser() || OperatingSystem.IsAndroid() || OperatingSystem.IsIOS() || OperatingSystem.IsTvOS())
-            && !Console.IsOutputRedirected;
+    private static bool GetColorsAreSupported() =>
+        !(OperatingSystem.IsBrowser() || OperatingSystem.IsAndroid() || OperatingSystem.IsIOS() || OperatingSystem.IsTvOS())
+        && !Console.IsOutputRedirected;
 
     internal static void SetTerminalForegroundRed()
     {
         if (ColorsAreSupported)
+        {
             Console.ForegroundColor = ConsoleColor.Red;
+        }
     }
 
     internal static void ResetTerminalForegroundColor()
     {
-        if (ColorsAreSupported) 
+        if (ColorsAreSupported)
+        {
             Console.ResetColor();
+        }
     }
 
     internal static void WriteError(string errorMessage)

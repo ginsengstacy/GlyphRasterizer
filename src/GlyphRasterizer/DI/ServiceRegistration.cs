@@ -1,5 +1,4 @@
-﻿using GlyphRasterizer.BitmapEncoders;
-using GlyphRasterizer.Configuration;
+﻿using GlyphRasterizer.Configuration;
 using GlyphRasterizer.IO;
 using GlyphRasterizer.Prompting;
 using GlyphRasterizer.Prompting.PromptAction;
@@ -11,7 +10,6 @@ using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyphs;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormats;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageSize;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.OutputDirectory;
-using GlyphRasterizer.Rendering;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GlyphRasterizer.DI;
@@ -23,7 +21,6 @@ public static class ServiceRegistration
         services
             .AddCoreServices()
             .AddPromptingSubsystem()
-            .AddRenderingSubsystem()
             .AddIoSubsystem();
 
         return services;
@@ -80,16 +77,9 @@ public static class ServiceRegistration
         return services;
     }
 
-    private static IServiceCollection AddRenderingSubsystem(this IServiceCollection services)
-    {
-        services.AddTransient<GlyphRenderer>();
-        return services;
-    }
-
     private static IServiceCollection AddIoSubsystem(this IServiceCollection services)
     {
         services.AddSingleton<OutputPathProvider>();
-        services.AddTransient<BitmapEncoderService>();
         services.AddTransient<OutputSaver>();
         services.AddTransient<OverwriteDecisionService>();
         return services;

@@ -15,7 +15,7 @@ public sealed class ImageFormatsParserUnitTests : ParserTestBase<ImageFormatsPar
 
     private const string InvalidImageFormat = "InvalidImageFormat";
 
-    private readonly static string _invalidFormatsErrorMessage = string.Format(
+    private static readonly string _invalidFormatsErrorMessage = string.Format(
         ErrorMessages.InvalidFormats_FormatString,
         $"'{InvalidImageFormat}'"
     );
@@ -29,12 +29,14 @@ public sealed class ImageFormatsParserUnitTests : ParserTestBase<ImageFormatsPar
     public void TryParse_Should_ReturnTrue_When_InputIsEachFormatRepresentation()
     {
         foreach ((ImageFormat format, FormatLookupData formatData) in ImageFormatDataLookup.Lookup)
+        {
             foreach (string representation in formatData.Representations)
             {
                 AssertParseSuccess(representation.ToLowerInvariant(), [format]); // lowercase
                 AssertParseSuccess(representation.ToUpperInvariant(), [format]); // uppercase
                 AssertParseSuccess($" {representation} ", [format]); // extra whitespace
             }
+        }
     }
 
     public static readonly TheoryData<string, ImmutableList<ImageFormat>> ValidInput =

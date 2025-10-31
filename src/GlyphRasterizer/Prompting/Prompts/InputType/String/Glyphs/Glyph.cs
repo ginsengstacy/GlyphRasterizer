@@ -12,7 +12,9 @@ public readonly record struct Glyph
     public Glyph(string input)
     {
         if (string.IsNullOrWhiteSpace(input))
+        {
             throw new ArgumentException(ErrorMessages.InvalidFormat);
+        }
 
         string normalized = input.Normalize(NormalizationForm.FormC);
 

@@ -42,12 +42,12 @@ public sealed class ImageFormatsParser : IPromptInputParser<string, ImmutableLis
         var parsedFormats = new HashSet<ImageFormat>();
         var invalidEntries = new List<string>();
 
-        foreach (var entry in tokens)
+        foreach (string token in tokens)
         {
-            var isValidImageFormatInput = LookupHelpers.TryGetKeyFromRepresentation(
+            bool isValidImageFormatInput = LookupHelpers.TryGetKeyFromRepresentation(
                 ImageFormatDataLookup.Lookup,
-                entry,
-                out var format,
+                token,
+                out ImageFormat format,
                 StringComparer.OrdinalIgnoreCase
             );
 
@@ -57,7 +57,7 @@ public sealed class ImageFormatsParser : IPromptInputParser<string, ImmutableLis
                 continue;
             }
 
-            invalidEntries.Add(entry);
+            invalidEntries.Add(token);
         }
 
         if (invalidEntries.Count > 0)

@@ -16,7 +16,7 @@ public sealed class GlyphsParserIntegrationTests : ParserTestBase<GlyphsParser, 
     private const string UncontainedGlyph1 = "𐀀";
     private const string UncontainedGlyph2 = "𐀁";
 
-    private static readonly string _unifontPath = ResourceHelper.GetFullPath("Fonts/Unifont.otf");
+    private static readonly string _unifontPath = ResourceHelpers.GetFullPath("Fonts/Unifont.otf");
     private static readonly GlyphTypeface _unifont = new(new Uri(_unifontPath));
 
     public static readonly TheoryData<string, string> UncontainedGlyphInput = new()

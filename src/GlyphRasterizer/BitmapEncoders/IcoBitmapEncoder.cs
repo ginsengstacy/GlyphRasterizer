@@ -34,7 +34,9 @@ public sealed class IcoBitmapEncoder : IBitmapEncoder
     private static void EnsureHasFrames(IList<BitmapFrame> frames)
     {
         if (frames.Count == 0)
+        {
             throw new NotSupportedException(ExceptionMessages.NoEncodableFrames);
+        }
     }
 
     private static List<byte[]> EncodeFramesToPngBytes(IList<BitmapFrame> frames) =>
@@ -109,7 +111,9 @@ public sealed class IcoBitmapEncoder : IBitmapEncoder
     private static void WriteImagePayloads(BinaryWriter writer, IEnumerable<byte[]> payloads)
     {
         foreach (byte[] payload in payloads)
+        {
             writer.Write(payload);
+        }
     }
 
     private sealed class IconDirEntry

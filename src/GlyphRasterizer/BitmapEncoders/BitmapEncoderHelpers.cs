@@ -5,13 +5,14 @@ using System.Windows.Media.Imaging;
 
 namespace GlyphRasterizer.BitmapEncoders;
 
-public sealed class BitmapEncoderService
+public static class BitmapEncoderHelpers
 {
-    public byte[] Encode(RenderTargetBitmap bitmap, ImageFormat imageFormat)
+    public static byte[] EncodeBitmapAs(RenderTargetBitmap bitmap, ImageFormat imageFormat)
     {
         IBitmapEncoder encoder = ImageEncoderLookup.Lookup[imageFormat]();
         BitmapFrame frame = BitmapFrame.Create(bitmap);
         frame.Freeze();
+
         encoder.Frames.Add(frame);
 
         using var memoryStream = new MemoryStream();

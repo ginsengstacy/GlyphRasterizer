@@ -15,8 +15,10 @@ public static partial class StringExtensions
         foreach (string part in parts)
         {
             index = actual.IndexOf(part, index, StringComparison.Ordinal);
-            if (index < 0) 
+            if (index < 0)
+            {
                 return false;
+            }
 
             index += part.Length;
         }

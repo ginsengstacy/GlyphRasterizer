@@ -7,9 +7,9 @@ using System.Windows.Media.Imaging;
 
 namespace GlyphRasterizer.Rendering;
 
-public sealed class GlyphRenderer
+public static class GlyphRenderer
 {
-    public RenderTargetBitmap RenderGlyph(Glyph glyph, GlyphTypeface glyphTypeface, Color glyphColor, int imageSize)
+    public static RenderTargetBitmap RenderGlyph(Glyph glyph, GlyphTypeface glyphTypeface, Color glyphColor, int imageSize)
     {
         Geometry outline = GetGlyphOutline(glyph, glyphTypeface, imageSize);
         TransformGroup transform = CreateCenteredTransform(outline, imageSize);
@@ -17,25 +17,34 @@ public sealed class GlyphRenderer
         return RenderToBitmap(visual, imageSize);
     }
 
-    public Geometry GetGlyphOutline(Glyph glyph, GlyphTypeface font, int imageSize)
+    public static Geometry GetGlyphOutline(Glyph glyph, GlyphTypeface font, int imageSize)
     {
         if (!font.CharacterToGlyphMap.TryGetValue(glyph.CodePoint, out ushort glyphIndex))
+        {
             throw new InvalidOperationException(ExceptionMessages.GlyphNotFound);
+        }
 
         return font.GetGlyphOutline(glyphIndex, imageSize, hintingEmSize: 1);
     }
 
-    public TransformGroup CreateCenteredTransform(Geometry outline, int targetSize)
+    public static TransformGroup CreateCenteredTransform(Geometry outline, int targetSize)
     {
         Rect bounds = outline.Bounds;
         double scale = targetSize / Math.Max(bounds.Width, bounds.Height);
         double offsetX = (targetSize - bounds.Width * scale) / 2 - bounds.X * scale;
         double offsetY = (targetSize - bounds.Height * scale) / 2 - bounds.Y * scale;
 
-        return new TransformGroup { Children = { new ScaleTransform(scale, scale), new TranslateTransform(offsetX, offsetY) } };
+        return new TransformGroup 
+        { 
+            Children = 
+            { 
+                new ScaleTransform(scale, scale), 
+                new TranslateTransform(offsetX, offsetY) 
+            } 
+        };
     }
 
-    public DrawingVisual DrawGlyphVisual(Geometry outline, Transform transform, Color color)
+    public static DrawingVisual DrawGlyphVisual(Geometry outline, Transform transform, Color color)
     {
         var visual = new DrawingVisual();
         var brush = new SolidColorBrush(color);
@@ -51,7 +60,7 @@ public sealed class GlyphRenderer
         return visual;
     }
 
-    private RenderTargetBitmap RenderToBitmap(Visual visual, int size)
+    private static RenderTargetBitmap RenderToBitmap(Visual visual, int size)
     {
         const double DPI = 96; // 1 WPF unit per pixel
         var bitmap = new RenderTargetBitmap(size, size, DPI, DPI, Defaults.PixelFormat);

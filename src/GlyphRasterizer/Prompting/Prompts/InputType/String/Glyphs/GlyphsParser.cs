@@ -37,7 +37,7 @@ public sealed class GlyphsParser : IPromptInputParser<GlyphParseContext, Immutab
         var parsedGlyphs = new List<Glyph>();
         var uncontainedGlyphs = new List<string>();
 
-        foreach (var token in tokens)
+        foreach (string token in tokens)
         {
             var glyph = new Glyph(token);
             if (typeface.CharacterToGlyphMap.TryGetValue(glyph.CodePoint, out _))

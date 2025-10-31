@@ -9,14 +9,15 @@ public sealed class OverwriteDecisionService(FileOverwritePrompt fileOverwritePr
 {
     public bool ShouldSave(string filePath, SessionContext context)
     {
-        if (!File.Exists(filePath))
+        if (!File.Exists(filePath) || context.OverwriteMode == OverwriteMode.OverwriteAll)
+        {
             return true;
-
-        if (context.OverwriteMode == OverwriteMode.OverwriteAll)
-            return true;
+        }
 
         if (context.OverwriteMode == OverwriteMode.SkipAll)
+        {
             return false;
+        }
 
         fileOverwritePrompt.RuntimeMessageParameters = [Path.GetFileName(filePath)];
         object? fileOverwriteResultObj = fileOverwritePrompt.Execute().ParsedInputValue;

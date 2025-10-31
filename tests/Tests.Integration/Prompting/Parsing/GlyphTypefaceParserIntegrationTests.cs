@@ -12,7 +12,7 @@ public sealed class GlyphTypefaceParserIntegrationTests : ParserTestBase<GlyphTy
 {
     protected override GlyphTypefaceParser Parser => new();
 
-    private static readonly string _unifontPath = ResourceHelper.GetFullPath("Fonts/Unifont.otf");
+    private static readonly string _unifontPath = ResourceHelpers.GetFullPath("Fonts/Unifont.otf");
     private static readonly GlyphTypeface _unifont = new(new Uri(_unifontPath));
 
     public static readonly TheoryData<string> ExistingValidFontPath = new()

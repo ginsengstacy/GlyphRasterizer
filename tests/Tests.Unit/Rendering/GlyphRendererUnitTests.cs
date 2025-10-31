@@ -7,13 +7,11 @@ namespace Tests.Unit.Rendering;
 
 public class GlyphRendererUnitTests
 {
-    private readonly static GlyphRenderer _glyphRenderer = new();
-
     [Fact]
     public void CreateCenteredTransform_Should_ScaleAndCenterGeometry()
     {
         var geometry = new RectangleGeometry(new Rect(0, 0, 10, 20));
-        TransformGroup transform = _glyphRenderer.CreateCenteredTransform(geometry, 100);
+        TransformGroup transform = GlyphRenderer.CreateCenteredTransform(geometry, 100);
 
         var scale = (ScaleTransform)transform.Children[0];
         var translate = (TranslateTransform)transform.Children[1];
@@ -31,7 +29,7 @@ public class GlyphRendererUnitTests
         var scale = new ScaleTransform(1, 1);
         var color = Colors.Red;
 
-        DrawingVisual drawingVisual = _glyphRenderer.DrawGlyphVisual(geometry, scale, color);
+        DrawingVisual drawingVisual = GlyphRenderer.DrawGlyphVisual(geometry, scale, color);
         drawingVisual.Should().NotBeNull();
     }
 }

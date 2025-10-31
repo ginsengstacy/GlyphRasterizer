@@ -26,8 +26,8 @@ public sealed class CLI(
     ImageFormatsParser imageFormatsParser,
     OutputDirectoryParser outputDirectoryParser,
     ImageSizeValidator imageSizeValidator,
-    GlyphRenderer glyphRenderer,
-    OutputSaver outputSaver)
+    OutputSaver outputSaver
+)
 {
     private static readonly string[] _imageFormatNames = Enum.GetNames<ImageFormat>();
 
@@ -111,7 +111,7 @@ public sealed class CLI(
 
             foreach (Glyph glyph in context.Glyphs!)
             {
-                RenderTargetBitmap bitmap = glyphRenderer.RenderGlyph(glyph, typeface, color!.Value, size.Value);
+                RenderTargetBitmap bitmap = GlyphRenderer.RenderGlyph(glyph, typeface, color!.Value, size.Value);
                 outputSaver.SaveBitmapAsEachSelectedFormat(glyph, bitmap, context);
             }
         });
@@ -119,19 +119,23 @@ public sealed class CLI(
         return root.Parse(args).Invoke();
     }
 
-    private static T? ParseWith<T>(ArgumentResult result, IPromptInputParser<string, T?> parser)
+    private static TParseResult? ParseWith<TParseResult>(ArgumentResult result, IPromptInputParser<string, TParseResult?> parser)
     {
         string combinedToken = string.Join(",", result.Tokens.Select(t => t.Value));
-        if (!parser.TryParse(combinedToken, out T? value, out string? errorMessage))
+        if (!parser.TryParse(combinedToken, out TParseResult? value, out string? errorMessage))
+        {
             result.AddError(errorMessage!);
+        }
 
         return value;
     }
 
-    private static void ValidateWith<T>(OptionResult result, IPromptValueValidator<T?> validator)
+    private static void ValidateWith<TValue>(OptionResult result, IPromptValueValidator<TValue?> validator)
     {
-        T? value = result.GetValueOrDefault<T>();
+        TValue? value = result.GetValueOrDefault<TValue>();
         if (!validator.IsValid(value, out string? errorMessage))
+        {
             result.AddError(errorMessage!);
+        }
     }
 }

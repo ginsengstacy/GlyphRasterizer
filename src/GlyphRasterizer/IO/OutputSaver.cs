@@ -8,11 +8,7 @@ using System.Windows.Media.Imaging;
 
 namespace GlyphRasterizer.IO;
 
-public sealed class OutputSaver(
-    BitmapEncoderService bitmapEncoderService,
-    OutputPathProvider outputPathProvider,
-    OverwriteDecisionService overwriteDecisionService
-)
+public sealed class OutputSaver(OutputPathProvider outputPathProvider, OverwriteDecisionService overwriteDecisionService)
 {
     public void SaveBitmapAsEachSelectedFormat(Glyph glyph, RenderTargetBitmap bitmap, SessionContext context)
     {
@@ -31,7 +27,7 @@ public sealed class OutputSaver(
 
             try
             {
-                byte[] encodedBytes = bitmapEncoderService.Encode(bitmap, imageFormat);
+                byte[] encodedBytes = BitmapEncoderHelpers.EncodeBitmapAs(bitmap, imageFormat);
                 File.WriteAllBytes(filePath, encodedBytes);
                 Console.WriteLine(string.Format(InfoMessages.SavedFile_FormatString, Path.GetFileName(filePath)));
             }

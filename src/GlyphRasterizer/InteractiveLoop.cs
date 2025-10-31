@@ -2,7 +2,6 @@
 using GlyphRasterizer.IO;
 using GlyphRasterizer.Lookup.PromptAction;
 using GlyphRasterizer.Prompting;
-using GlyphRasterizer.Prompting.PromptAction;
 using GlyphRasterizer.Prompting.Prompts.InputType.Key.Restart;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyphs;
 using GlyphRasterizer.Rendering;
@@ -12,12 +11,7 @@ using System.Windows.Media.Imaging;
 
 namespace GlyphRasterizer;
 
-public sealed class InteractiveLoop(
-    PromptWizard promptWizard,
-    RestartPrompt restartPrompt,
-    GlyphRenderer glyphRenderer,
-    OutputSaver outputSaver
-)
+public sealed class InteractiveLoop(PromptWizard promptWizard, RestartPrompt restartPrompt, OutputSaver outputSaver)
 {
     public void Run()
     {
@@ -37,7 +31,7 @@ public sealed class InteractiveLoop(
                     Color glyphColor = currentSessionContext.GlyphColor!.Value;
                     int imageSize = currentSessionContext.ImageSize!.Value;
 
-                    RenderTargetBitmap bitmap = glyphRenderer.RenderGlyph(glyph, glyphTypeface, glyphColor, imageSize);
+                    RenderTargetBitmap bitmap = GlyphRenderer.RenderGlyph(glyph, glyphTypeface, glyphColor, imageSize);
                     outputSaver.SaveBitmapAsEachSelectedFormat(glyph, bitmap, currentSessionContext);
                 }
 

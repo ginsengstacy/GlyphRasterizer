@@ -11,8 +11,11 @@ public sealed class OutputPathProvider(OutputDirectoryParser outputDirectoryPars
     public string GetOutputDirectory(Glyph glyph, SessionContext context)
     {
         string outputDirectory = context.OutputDirectory!;
+
         if (!outputDirectoryParser.TryParse(outputDirectory, out _, out string? errorMessage))
+        {
             throw new FileNotFoundException(errorMessage);
+        }
 
         UnicodeCategory category = char.GetUnicodeCategory(glyph.UnicodeValue[0]);
         int imageSize = context.ImageSize!.Value;

@@ -8,7 +8,7 @@
   - **Single character**: `"A"`  
   - **Multiple characters**: `"ABC123"`
 
-> **Note:** When entering multiple glyphs, each glyph is rendered individually into its own image file.
+> **Note:** If multiple glyphs are entered, each one is rendered as a separate image file. Any valid Unicode sequence can be used as a glyph.
 
 **Color**  
 - Can be specified using a named color (e.g., `Red`) or a hexadecimal code (e.g., `#FF0000`).

@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{BC719596-A48E-47F8-B7B8-0F501CFAFF01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resources", "Resources\Resources.csproj", "{61585738-A726-2BEB-69E8-040F08657BC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlyphRasterizer", "src\GlyphRasterizer\GlyphRasterizer.csproj", "{DA67F46B-4DF6-6AD1-E116-54A781F1DDDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Common", "tests\Tests.Common\Tests.Common.csproj", "{7D691932-52C0-AB77-4078-DDA751C4288C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Unit", "tests\Tests.Unit\Tests.Unit.csproj", "{44C835EB-9518-81FE-AEDB-312B2931CAB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Integration", "tests\Tests.Integration\Tests.Integration.csproj", "{50CD6731-E849-2313-F512-47AB883C1673}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61585738-A726-2BEB-69E8-040F08657BC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61585738-A726-2BEB-69E8-040F08657BC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61585738-A726-2BEB-69E8-040F08657BC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61585738-A726-2BEB-69E8-040F08657BC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA67F46B-4DF6-6AD1-E116-54A781F1DDDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA67F46B-4DF6-6AD1-E116-54A781F1DDDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA67F46B-4DF6-6AD1-E116-54A781F1DDDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA67F46B-4DF6-6AD1-E116-54A781F1DDDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D691932-52C0-AB77-4078-DDA751C4288C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D691932-52C0-AB77-4078-DDA751C4288C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D691932-52C0-AB77-4078-DDA751C4288C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D691932-52C0-AB77-4078-DDA751C4288C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44C835EB-9518-81FE-AEDB-312B2931CAB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44C835EB-9518-81FE-AEDB-312B2931CAB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44C835EB-9518-81FE-AEDB-312B2931CAB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44C835EB-9518-81FE-AEDB-312B2931CAB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50CD6731-E849-2313-F512-47AB883C1673}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50CD6731-E849-2313-F512-47AB883C1673}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50CD6731-E849-2313-F512-47AB883C1673}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50CD6731-E849-2313-F512-47AB883C1673}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DA67F46B-4DF6-6AD1-E116-54A781F1DDDE} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{7D691932-52C0-AB77-4078-DDA751C4288C} = {BC719596-A48E-47F8-B7B8-0F501CFAFF01}
+		{44C835EB-9518-81FE-AEDB-312B2931CAB7} = {BC719596-A48E-47F8-B7B8-0F501CFAFF01}
+		{50CD6731-E849-2313-F512-47AB883C1673} = {BC719596-A48E-47F8-B7B8-0F501CFAFF01}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BA6F7316-DFCB-4163-B9C1-D0C40D981666}
+	EndGlobalSection
+EndGlobal

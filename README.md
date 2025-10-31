@@ -8,7 +8,7 @@
   - **Single character**: `"A"`  
   - **Multiple characters**: `"ABC123"`
 
-> **Note:** When entering multiple glyphs, each glyph is rendered individually into its own image file.
+> **Note:** If multiple glyphs are entered, each one is rendered as a separate image file. Any valid Unicode sequence can be used as a glyph.
 
 **Color**  
 - Can be specified using a named color (e.g., `Red`) or a hexadecimal code (e.g., `#FF0000`).
@@ -103,7 +103,3 @@ During an interactive session, you can enter the following commands at any promp
 ### Example Session
 
 <img width="1056" height="445" alt="Screenshot 2025-10-31 063515" src="https://github.com/user-attachments/assets/b48a4bb4-b9b3-435b-947a-1640a1251d93" />
-
-## Notes
-
-* The tool asks to overwrite existing files in the output directory if names conflict.

@@ -51,7 +51,6 @@ public sealed class GlyphTypefaceParserIntegrationTests : ParserTestBase<GlyphTy
                 catch
                 {
                 }
-                ;
             }
         }
     }

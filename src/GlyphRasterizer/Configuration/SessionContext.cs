@@ -1,6 +1,6 @@
 ﻿using GlyphRasterizer.Lookup.Format.Image;
 using GlyphRasterizer.Prompting;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyphs;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using System.Collections.Immutable;
 using System.Windows.Media;
 

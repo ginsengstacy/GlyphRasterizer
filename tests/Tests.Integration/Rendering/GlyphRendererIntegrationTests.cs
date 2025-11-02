@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyphs;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using GlyphRasterizer.Rendering;
 using Resources;
 using System.Windows.Media;

@@ -4,9 +4,9 @@ using GlyphRasterizer.Lookup.Format.Font;
 using GlyphRasterizer.Lookup.Format.Image;
 using GlyphRasterizer.Prompting;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.Font;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.GlyphColor;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyphs;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormats;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormat;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageSize;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.OutputDirectory;
 using GlyphRasterizer.Rendering;
@@ -21,9 +21,9 @@ namespace GlyphRasterizer;
 
 public sealed class CLI(
     GlyphColorParser glyphColorParser,
-    GlyphsParser glyphsParser,
+    GlyphParser glyphParser,
     GlyphTypefaceParser glyphTypefaceParser,
-    ImageFormatsParser imageFormatsParser,
+    ImageFormatParser imageFormatParser,
     OutputDirectoryParser outputDirectoryParser,
     ImageSizeValidator imageSizeValidator,
     OutputSaver outputSaver
@@ -45,7 +45,7 @@ public sealed class CLI(
             CustomParser = result => ParseWith(result, glyphTypefaceParser)
         };
 
-        var glyphsArg = new Argument<string>("glyphs") { Description = CLIDescriptions.Glyphs };
+        var glyphArg = new Argument<string>("glyph") { Description = CLIDescriptions.Glyph };
 
         var outputDirectoryArg = new Argument<string>("output")
         {
@@ -63,7 +63,11 @@ public sealed class CLI(
 
         var sizeOpt = new Option<int>("--size")
         {
-            Description = string.Format(CLIDescriptions.Size_FormatString, Config.MinImageSize, Config.MaxImageSize),
+            Description = string.Format(
+                CLIDescriptions.Size_FormatString, 
+                Config.MinImageSize, 
+                Config.MaxImageSize
+            ),
             DefaultValueFactory = _ => Defaults.ImageSize,
         };
         sizeOpt.Validators.Add(result => ValidateWith(result, imageSizeValidator));
@@ -71,18 +75,18 @@ public sealed class CLI(
         var formatOpt = new Option<ImmutableList<ImageFormat>>("--format")
         {
             Description = string.Format(
-                CLIDescriptions.ImageFormats_FormatString,
+                CLIDescriptions.ImageFormat_FormatString,
                 _imageFormatNames.ElementAtOrDefault(0),
                 _imageFormatNames.ElementAtOrDefault(1),
                 string.Join(", ", _imageFormatNames)
             ),
             AllowMultipleArgumentsPerToken = true,
-            DefaultValueFactory = _ => Defaults.ImageFormats,
-            CustomParser = result => ParseWith(result, imageFormatsParser)
+            DefaultValueFactory = _ => Defaults.ImageFormat,
+            CustomParser = result => ParseWith(result, imageFormatParser)
         };
 
         root.Add(fontPathArg);
-        root.Add(glyphsArg);
+        root.Add(glyphArg);
         root.Add(outputDirectoryArg);
         root.Add(colorOpt);
         root.Add(sizeOpt);
@@ -91,13 +95,13 @@ public sealed class CLI(
         root.SetAction(parseResult =>
         {
             GlyphTypeface typeface = parseResult.GetValue(fontPathArg)!;
-            string glyphInput = parseResult.GetValue(glyphsArg)!;
+            string glyphInput = parseResult.GetValue(glyphArg)!;
             string outputDirectory = parseResult.GetValue(outputDirectoryArg)!;
             Color? color = parseResult.GetValue(colorOpt);
             int? size = parseResult.GetValue(sizeOpt);
             ImmutableList<ImageFormat>? formats = parseResult.GetValue(formatOpt);
 
-            if (!glyphsParser.TryParse(
+            if (!glyphParser.TryParse(
                 new GlyphParseContext(glyphInput, typeface),
                 out ImmutableList<Glyph>? glyphs,
                 out string? errorMessage)

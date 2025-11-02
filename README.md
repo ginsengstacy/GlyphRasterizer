@@ -8,7 +8,7 @@
   - **Single character**: `"A"`  
   - **Multiple characters**: `"ABC123"`
 
-> **Note:** If multiple glyphs are entered, each one is rendered as a separate image file. Any valid Unicode sequence can be used as a glyph.
+> **Note:** Each character in a multi-character string is rendered as a separate image file. Any valid Unicode character can be used as a glyph.
 
 **Color**  
 - Can be specified using a named color (e.g., `Red`) or a hexadecimal code (e.g., `#FF0000`).
@@ -30,7 +30,7 @@
 ### Usage
 
 ```
-GlyphRasterizer.exe <font> <glyphs> <output> [options]
+GlyphRasterizer.exe <font> <glyph> <output> [options]
 ```
 
 ### Arguments
@@ -38,7 +38,7 @@ GlyphRasterizer.exe <font> <glyphs> <output> [options]
 | Argument      | Description                                  |
 | ------------- | -------------------------------------------- |
 | `<font>`      | Path to the font file.                       |
-| `<glyphs>`    | Glyph(s) to render.                          |
+| `<glyph>`    	| Glyph(s) to render.                          |
 | `<output>`    | Output directory.                            |
 
 ### Options

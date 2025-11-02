@@ -1,15 +1,15 @@
 ﻿using GlyphRasterizer.Lookup.Format;
 using GlyphRasterizer.Lookup.Format.Image;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormats;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormat;
 using Resources.Messages;
 using System.Collections.Immutable;
 using Tests.Common.Prompting.Parsing;
 
 namespace Tests.Unit.Prompting.Parsing;
 
-public sealed class ImageFormatsParserUnitTests : ParserTestBase<ImageFormatsParser, string, ImmutableList<ImageFormat>?>
+public sealed class ImageFormatParserUnitTests : ParserTestBase<ImageFormatParser, string, ImmutableList<ImageFormat>?>
 {
-    protected override ImageFormatsParser Parser { get; } = new();
+    protected override ImageFormatParser Parser { get; } = new();
 
     private static readonly ImmutableList<ImageFormat> _allImageFormats = [.. Enum.GetValues<ImageFormat>()];
 

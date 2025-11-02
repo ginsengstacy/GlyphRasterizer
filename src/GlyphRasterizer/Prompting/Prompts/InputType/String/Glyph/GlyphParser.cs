@@ -4,9 +4,9 @@ using System.Globalization;
 using System.Text;
 using System.Windows.Media;
 
-namespace GlyphRasterizer.Prompting.Prompts.InputType.String.Glyphs;
+namespace GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 
-public sealed class GlyphsParser : IPromptInputParser<GlyphParseContext, ImmutableList<Glyph>?>
+public sealed class GlyphParser : IPromptInputParser<GlyphParseContext, ImmutableList<Glyph>?>
 {
     public bool TryParse(GlyphParseContext glyphParseContext, out ImmutableList<Glyph>? value, out string? errorMessage)
     {

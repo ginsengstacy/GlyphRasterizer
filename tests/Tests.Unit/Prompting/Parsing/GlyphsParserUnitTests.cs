@@ -1,13 +1,13 @@
-﻿using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyphs;
+﻿using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using Resources.Messages;
 using System.Collections.Immutable;
 using Tests.Common.Prompting.Parsing;
 
 namespace Tests.Unit.Prompting.Parsing;
 
-public sealed class GlyphsParserUnitTests : ParserTestBase<GlyphsParser, GlyphParseContext, ImmutableList<Glyph>?>
+public sealed class GlyphsParserUnitTests : ParserTestBase<GlyphParser, GlyphParseContext, ImmutableList<Glyph>?>
 {
-    protected override GlyphsParser Parser { get; } = new();
+    protected override GlyphParser Parser { get; } = new();
 
     [Theory]
     [MemberData(nameof(EmptyStringInput))]

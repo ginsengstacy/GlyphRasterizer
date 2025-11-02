@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyphs;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using Resources;
 using Resources.Messages;
 using System.Collections.Immutable;
@@ -9,9 +9,9 @@ using Tests.Common.Prompting.Parsing;
 
 namespace Tests.Integration.Prompting.Parsing;
 
-public sealed class GlyphsParserIntegrationTests : ParserTestBase<GlyphsParser, GlyphParseContext, ImmutableList<Glyph>?>
+public sealed class GlyphParserIntegrationTests : ParserTestBase<GlyphParser, GlyphParseContext, ImmutableList<Glyph>?>
 {
-    protected override GlyphsParser Parser { get; } = new();
+    protected override GlyphParser Parser { get; } = new();
 
     private const string UncontainedGlyph1 = "𐀀";
     private const string UncontainedGlyph2 = "𐀁";

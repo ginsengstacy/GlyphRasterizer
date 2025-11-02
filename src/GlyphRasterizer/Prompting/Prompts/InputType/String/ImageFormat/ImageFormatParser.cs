@@ -3,13 +3,13 @@ using GlyphRasterizer.Lookup.Format.Image;
 using Resources.Messages;
 using System.Collections.Immutable;
 
-namespace GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormats;
+namespace GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormat;
 
-public sealed class ImageFormatsParser : IPromptInputParser<string, ImmutableList<ImageFormat>?>
+public sealed class ImageFormatParser : IPromptInputParser<string, ImmutableList<Lookup.Format.Image.ImageFormat>?>
 {
-    private static readonly HashSet<ImageFormat> Formats = [.. Enum.GetValues<ImageFormat>()];
+    private static readonly HashSet<Lookup.Format.Image.ImageFormat> Formats = [.. Enum.GetValues<Lookup.Format.Image.ImageFormat>()];
 
-    public bool TryParse(string input, out ImmutableList<ImageFormat>? value, out string? errorMessage)
+    public bool TryParse(string input, out ImmutableList<Lookup.Format.Image.ImageFormat>? value, out string? errorMessage)
     {
         if (string.IsNullOrWhiteSpace(input))
         {
@@ -39,7 +39,7 @@ public sealed class ImageFormatsParser : IPromptInputParser<string, ImmutableLis
             return false;
         }
 
-        var parsedFormats = new HashSet<ImageFormat>();
+        var parsedFormats = new HashSet<Lookup.Format.Image.ImageFormat>();
         var invalidEntries = new List<string>();
 
         foreach (string token in tokens)
@@ -47,7 +47,7 @@ public sealed class ImageFormatsParser : IPromptInputParser<string, ImmutableLis
             bool isValidImageFormatInput = LookupHelpers.TryGetKeyFromRepresentation(
                 ImageFormatDataLookup.Lookup,
                 token,
-                out ImageFormat format,
+                out Lookup.Format.Image.ImageFormat format,
                 StringComparer.OrdinalIgnoreCase
             );
 

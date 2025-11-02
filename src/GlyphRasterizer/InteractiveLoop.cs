@@ -3,7 +3,7 @@ using GlyphRasterizer.IO;
 using GlyphRasterizer.Lookup.PromptAction;
 using GlyphRasterizer.Prompting;
 using GlyphRasterizer.Prompting.Prompts.InputType.Key.Restart;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyphs;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using GlyphRasterizer.Rendering;
 using Resources.Messages;
 using System.Windows.Media;

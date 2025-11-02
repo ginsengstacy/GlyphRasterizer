@@ -1,5 +1,5 @@
 ﻿using GlyphRasterizer.Configuration;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyphs;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using Resources.Messages;
 using System.Windows;
 using System.Windows.Media;

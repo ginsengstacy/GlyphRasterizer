@@ -1,5 +1,5 @@
 ﻿using GlyphRasterizer.Configuration;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyphs;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.OutputDirectory;
 using System.Globalization;
 using System.IO;

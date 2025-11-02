@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace GlyphRasterizer.Prompting.Prompts.InputType.String.Glyphs;
+namespace GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 
 public readonly struct GlyphParseContext(string input, GlyphTypeface? glyphTypeface)
 {

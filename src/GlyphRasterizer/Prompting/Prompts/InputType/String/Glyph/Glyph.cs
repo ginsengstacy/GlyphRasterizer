@@ -1,7 +1,7 @@
 ﻿using Resources.Messages;
 using System.Text;
 
-namespace GlyphRasterizer.Prompting.Prompts.InputType.String.Glyphs;
+namespace GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 
 public readonly record struct Glyph
 {

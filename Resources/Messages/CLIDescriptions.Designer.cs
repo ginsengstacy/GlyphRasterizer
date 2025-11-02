@@ -81,18 +81,18 @@ namespace Resources.Messages {
         /// <summary>
         ///   Looks up a localized string similar to Gyph(s) to render. Single (e.g., A) or multiple (e.g., ABC)..
         /// </summary>
-        public static string Glyphs {
+        public static string Glyph {
             get {
-                return ResourceManager.GetString("Glyphs", resourceCulture);
+                return ResourceManager.GetString("Glyph", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Output image format(s) to generate. Single (e.g., {0}), multiple (e.g., {0}, {1}), or &apos;All&apos;. Available: {2}..
         /// </summary>
-        public static string ImageFormats_FormatString {
+        public static string ImageFormat_FormatString {
             get {
-                return ResourceManager.GetString("ImageFormats_FormatString", resourceCulture);
+                return ResourceManager.GetString("ImageFormat_FormatString", resourceCulture);
             }
         }
         

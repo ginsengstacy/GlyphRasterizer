@@ -123,10 +123,10 @@
   <data name="FontPath_FormatString" xml:space="preserve">
     <value>Font file (e.g., C:\Users\Alice\Fonts\Arial.ttf). Available: {0}.</value>
   </data>
-  <data name="ImageFormats_FormatString" xml:space="preserve">
+  <data name="ImageFormat_FormatString" xml:space="preserve">
     <value>Output image format(s) to generate. Single (e.g., {0}), multiple (e.g., {0}, {1}), or 'All'. Available: {2}.</value>
   </data>
-  <data name="Glyphs" xml:space="preserve">
+  <data name="Glyph" xml:space="preserve">
     <value>Gyph(s) to render. Single (e.g., A) or multiple (e.g., ABC).</value>
   </data>
   <data name="OutputDirectory" xml:space="preserve">

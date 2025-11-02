@@ -1,7 +1,7 @@
 ﻿using GlyphRasterizer.Configuration;
 using GlyphRasterizer.Prompting.PromptAction;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.Font;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyphs;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.OutputDirectory;
 using System.Collections.Immutable;
 
@@ -27,7 +27,7 @@ public sealed class PromptWizard(SessionContextFactory sessionContextFactory)
                 continue;
             }
 
-            if (currentPrompt is GlyphsPrompt glyphsPrompt)
+            if (currentPrompt is GlyphPrompt glyphsPrompt)
             {
                 glyphsPrompt.CurrentTypeface = currentContext.GlyphTypeface;
             }

@@ -90,18 +90,18 @@ namespace Resources.Messages {
         /// <summary>
         ///   Looks up a localized string similar to Enter glyph(s): single (e.g., A) or multiple (e.g., ABC).{0}Glyph(s):.
         /// </summary>
-        public static string Glyphs_FormatString {
+        public static string Glyph_FormatString {
             get {
-                return ResourceManager.GetString("Glyphs_FormatString", resourceCulture);
+                return ResourceManager.GetString("Glyph_FormatString", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Enter format(s): single (e.g., {0}), multiple (e.g., {0}, {1}), or &apos;All&apos;. Options: {2}.{3}Format(s):.
         /// </summary>
-        public static string ImageFormats_FormatString {
+        public static string ImageFormat_FormatString {
             get {
-                return ResourceManager.GetString("ImageFormats_FormatString", resourceCulture);
+                return ResourceManager.GetString("ImageFormat_FormatString", resourceCulture);
             }
         }
         

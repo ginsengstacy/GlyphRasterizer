@@ -1,7 +1,7 @@
 ﻿using GlyphRasterizer.BitmapEncoders;
 using GlyphRasterizer.Configuration;
 using GlyphRasterizer.Lookup.Format.Image;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyphs;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using Resources.Messages;
 using System.IO;
 using System.Windows.Media.Imaging;

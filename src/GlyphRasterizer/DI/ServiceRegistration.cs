@@ -5,9 +5,9 @@ using GlyphRasterizer.Prompting.PromptAction;
 using GlyphRasterizer.Prompting.Prompts.InputType.Key.OverwriteFile;
 using GlyphRasterizer.Prompting.Prompts.InputType.Key.Restart;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.Font;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.GlyphColor;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyphs;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormats;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormat;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageSize;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.OutputDirectory;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,10 +46,10 @@ public static class ServiceRegistration
     private static IServiceCollection AddPromptServices(this IServiceCollection services)
     {
         services.AddSingleton<FontPrompt>();
-        services.AddSingleton<GlyphsPrompt>();
+        services.AddSingleton<GlyphPrompt>();
         services.AddSingleton<GlyphColorPrompt>();
         services.AddSingleton<ImageSizePrompt>();
-        services.AddSingleton<ImageFormatsPrompt>();
+        services.AddSingleton<ImageFormatPrompt>();
         services.AddSingleton<OutputDirectoryPrompt>();
         services.AddSingleton<FileOverwritePrompt>();
         services.AddSingleton<RestartPrompt>();
@@ -59,9 +59,9 @@ public static class ServiceRegistration
     private static IServiceCollection AddParserServices(this IServiceCollection services)
     {
         services.AddSingleton<GlyphTypefaceParser>();
-        services.AddSingleton<GlyphsParser>();
+        services.AddSingleton<GlyphParser>();
         services.AddSingleton<GlyphColorParser>();
-        services.AddSingleton<ImageFormatsParser>();
+        services.AddSingleton<ImageFormatParser>();
         services.AddSingleton<OutputDirectoryParser>();
         services.AddSingleton<FileOverwriteParser>();
         services.AddSingleton<RestartParser>();

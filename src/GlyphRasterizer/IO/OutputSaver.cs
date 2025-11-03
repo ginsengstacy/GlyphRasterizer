@@ -14,7 +14,7 @@ public sealed class OutputSaver(OutputPathProvider outputPathProvider, Overwrite
     {
         Directory.CreateDirectory(outputPathProvider.GetOutputDirectory(glyph, context));
 
-        foreach (ImageFormat imageFormat in context.ImageFormats!)
+        foreach (ImageFormat imageFormat in context.Formats!)
         {
             string extension = ImageFormatDataLookup.Lookup[imageFormat].Extension;
             string filePath = outputPathProvider.GetFilePath(glyph, extension, context);

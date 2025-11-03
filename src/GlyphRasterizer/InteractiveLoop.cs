@@ -15,7 +15,7 @@ public sealed class InteractiveLoop(PromptWizard promptWizard, RestartPrompt res
 {
     public void Run()
     {
-        SessionContext? previousSessionContext = null;
+        SessionContext? previousContext = null;
 
         while (true)
         {
@@ -23,20 +23,20 @@ public sealed class InteractiveLoop(PromptWizard promptWizard, RestartPrompt res
 
             try
             {
-                SessionContext currentSessionContext = promptWizard.GetSessionContext(previousSessionContext);
+                SessionContext currentContext = promptWizard.GetSessionContext(previousContext);
 
-                foreach (Glyph glyph in currentSessionContext.Glyphs!)
+                foreach (Glyph glyph in currentContext.Glyphs!)
                 {
-                    GlyphTypeface glyphTypeface = currentSessionContext.GlyphTypeface!;
-                    Color glyphColor = currentSessionContext.GlyphColor!.Value;
-                    int imageSize = currentSessionContext.ImageSize!.Value;
+                    GlyphTypeface glyphTypeface = currentContext.GlyphTypeface!;
+                    Color glyphColor = currentContext.GlyphColor!.Value;
+                    int imageSize = currentContext.ImageSize!.Value;
 
                     RenderTargetBitmap bitmap = GlyphRenderer.RenderGlyph(glyph, glyphTypeface, glyphColor, imageSize);
-                    outputSaver.SaveBitmapAsEachSelectedFormat(glyph, bitmap, currentSessionContext);
+                    outputSaver.SaveBitmapAsEachSelectedFormat(glyph, bitmap, currentContext);
                 }
 
                 Console.WriteLine(InfoMessages.OperationComplete);
-                HandleRestart(ref previousSessionContext, currentSessionContext);
+                HandleRestart(ref previousContext, currentContext);
             }
             catch (OperationCanceledException)
             {
@@ -49,7 +49,7 @@ public sealed class InteractiveLoop(PromptWizard promptWizard, RestartPrompt res
         }
     }
 
-    public void HandleRestart(ref SessionContext? previousSessionContext, SessionContext currentSessionContext)
+    public void HandleRestart(ref SessionContext? previousContext, SessionContext currentContext)
     {
         while (true)
         {
@@ -60,10 +60,10 @@ public sealed class InteractiveLoop(PromptWizard promptWizard, RestartPrompt res
                 switch (restartResult)
                 {
                     case RestartPromptResultType.RestartWithPreviousContext:
-                        RestartProgram(ref previousSessionContext, currentSessionContext);
+                        RestartProgram(ref previousContext, currentContext);
                         break;
                     case RestartPromptResultType.RestartWithoutPreviousContext:
-                        RestartProgram(ref previousSessionContext);
+                        RestartProgram(ref previousContext);
                         break;
                     case RestartPromptResultType.Quit:
                         ExitProgram();

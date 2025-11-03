@@ -6,9 +6,9 @@ using System.Windows.Media;
 
 namespace GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 
-public sealed class GlyphParser : IPromptInputParser<GlyphParseContext, ImmutableList<Glyph>?>
+public sealed class GlyphParser : IPromptInputParser<GlyphParseContext, ImmutableArray<Glyph>?>
 {
-    public bool TryParse(GlyphParseContext glyphParseContext, out ImmutableList<Glyph>? value, out string? errorMessage)
+    public bool TryParse(GlyphParseContext glyphParseContext, out ImmutableArray<Glyph>? value, out string? errorMessage)
     {
         string input = glyphParseContext.Input;
 

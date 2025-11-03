@@ -1,17 +1,17 @@
 ﻿using GlyphRasterizer.Lookup.Format;
 using GlyphRasterizer.Lookup.Format.Image;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormat;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Format;
 using Resources.Messages;
 using System.Collections.Immutable;
 using Tests.Common.Prompting.Parsing;
 
 namespace Tests.Unit.Prompting.Parsing;
 
-public sealed class ImageFormatParserUnitTests : ParserTestBase<ImageFormatParser, string, ImmutableList<ImageFormat>?>
+public sealed class ImageFormatParserUnitTests : ParserTestBase<ImageFormatParser, string, ImmutableArray<ImageFormat>?>
 {
     protected override ImageFormatParser Parser { get; } = new();
 
-    private static readonly ImmutableList<ImageFormat> _allImageFormats = [.. Enum.GetValues<ImageFormat>()];
+    private static readonly ImmutableArray<ImageFormat> _allImageFormats = [.. Enum.GetValues<ImageFormat>()];
 
     private const string InvalidImageFormat = "InvalidImageFormat";
 
@@ -39,7 +39,7 @@ public sealed class ImageFormatParserUnitTests : ParserTestBase<ImageFormatParse
         }
     }
 
-    public static readonly TheoryData<string, ImmutableList<ImageFormat>> ValidInput =
+    public static readonly TheoryData<string, ImmutableArray<ImageFormat>> ValidInput =
         new()
         {
             { "PNG,JPG", [ ImageFormat.Png, ImageFormat.Jpeg] }, // multiple
@@ -62,7 +62,7 @@ public sealed class ImageFormatParserUnitTests : ParserTestBase<ImageFormatParse
 
     [Theory]
     [MemberData(nameof(ValidInput))]
-    public void TryParse_Should_ReturnTrue_When_InputIsValid(string input, ImmutableList<ImageFormat> expectedValue) =>
+    public void TryParse_Should_ReturnTrue_When_InputIsValid(string input, ImmutableArray<ImageFormat> expectedValue) =>
         AssertParseSuccess(input, expectedValue);
 
     [Theory]

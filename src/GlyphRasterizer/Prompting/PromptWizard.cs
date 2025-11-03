@@ -7,11 +7,11 @@ using System.Collections.Immutable;
 
 namespace GlyphRasterizer.Prompting;
 
-public sealed class PromptWizard(SessionContextFactory sessionContextFactory)
+public sealed class PromptWizard(SessionContextFactory contextFactory)
 {
     public SessionContext GetSessionContext(SessionContext? previousContext)
     {
-        SessionContext currentContext = previousContext ?? sessionContextFactory.CreateDefault();
+        SessionContext currentContext = previousContext ?? contextFactory.CreateDefault();
         ImmutableArray<IPrompt> promptOrder = currentContext.PromptOrder;
         var totalSteps = promptOrder.Length;
         var i = 0;
@@ -51,7 +51,8 @@ public sealed class PromptWizard(SessionContextFactory sessionContextFactory)
                     break;
 
                 case PromptActionType.Restart:
-                    currentContext = sessionContextFactory.CreateDefault();
+                    currentContext = 
+                        contextFactory.CreateDefault();
                     i = 0;
                     break;
 

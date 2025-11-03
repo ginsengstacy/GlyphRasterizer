@@ -4,9 +4,9 @@ using GlyphRasterizer.Lookup.Format.Font;
 using GlyphRasterizer.Lookup.Format.Image;
 using GlyphRasterizer.Prompting;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.Font;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Format;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.GlyphColor;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormat;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageSize;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.OutputDirectory;
 using GlyphRasterizer.Rendering;
@@ -72,7 +72,7 @@ public sealed class CLI(
         };
         sizeOpt.Validators.Add(result => ValidateWith(result, imageSizeValidator));
 
-        var formatOpt = new Option<ImmutableList<ImageFormat>>("--format")
+        var formatOpt = new Option<ImmutableArray<ImageFormat>?>("--format")
         {
             Description = string.Format(
                 CLIDescriptions.ImageFormat_FormatString,
@@ -99,11 +99,11 @@ public sealed class CLI(
             string outputDirectory = parseResult.GetValue(outputDirectoryArg)!;
             Color? color = parseResult.GetValue(colorOpt);
             int? size = parseResult.GetValue(sizeOpt);
-            ImmutableList<ImageFormat>? formats = parseResult.GetValue(formatOpt);
+            ImmutableArray<ImageFormat>? formats = parseResult.GetValue(formatOpt);
 
             if (!glyphParser.TryParse(
                 new GlyphParseContext(glyphInput, typeface),
-                out ImmutableList<Glyph>? glyphs,
+                out ImmutableArray<Glyph>? glyphs,
                 out string? errorMessage)
             )
             {
@@ -111,7 +111,7 @@ public sealed class CLI(
                 return;
             }
 
-            var context = new SessionContext(typeface, glyphs!, outputDirectory, color, size, formats);
+            var context = new SessionContext(typeface, glyphs!.Value, outputDirectory, color!.Value, size!.Value, formats!.Value);
 
             foreach (Glyph glyph in context.Glyphs!)
             {

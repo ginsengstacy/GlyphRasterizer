@@ -10,11 +10,11 @@ public sealed class SessionContext
 {
     public SessionContext(
         GlyphTypeface glyphTypeface,
-        ImmutableList<Glyph> glyphs,
+        ImmutableArray<Glyph> glyphs,
         string outputDirectory,
-        Color? glyphColor,
-        int? imageSize,
-        ImmutableList<ImageFormat>? imageFormats
+        Color glyphColor,
+        int imageSize,
+        ImmutableArray<ImageFormat> formats
     )
     {
         GlyphTypeface = glyphTypeface;
@@ -22,7 +22,7 @@ public sealed class SessionContext
         OutputDirectory = outputDirectory;
         GlyphColor = glyphColor;
         ImageSize = imageSize;
-        ImageFormats = imageFormats;
+        Formats = formats;
     }
 
     public SessionContext(ImmutableArray<IPrompt> promptOrder)
@@ -35,9 +35,9 @@ public sealed class SessionContext
     public OverwriteMode OverwriteMode { get; set; } = OverwriteMode.AskAgain;
 
     public GlyphTypeface? GlyphTypeface { get; set; }
-    public ImmutableList<Glyph>? Glyphs { get; set; }
+    public ImmutableArray<Glyph>? Glyphs { get; set; }
     public Color? GlyphColor { get; set; }
     public int? ImageSize { get; set; }
-    public ImmutableList<ImageFormat>? ImageFormats { get; set; }
+    public ImmutableArray<ImageFormat>? Formats { get; set; }
     public string? OutputDirectory { get; set; }
 }

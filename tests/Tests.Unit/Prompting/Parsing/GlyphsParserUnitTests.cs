@@ -5,7 +5,7 @@ using Tests.Common.Prompting.Parsing;
 
 namespace Tests.Unit.Prompting.Parsing;
 
-public sealed class GlyphsParserUnitTests : ParserTestBase<GlyphParser, GlyphParseContext, ImmutableList<Glyph>?>
+public sealed class GlyphsParserUnitTests : ParserTestBase<GlyphParser, GlyphParseContext, ImmutableArray<Glyph>?>
 {
     protected override GlyphParser Parser { get; } = new();
 

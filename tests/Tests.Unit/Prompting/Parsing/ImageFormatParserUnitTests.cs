@@ -1,72 +1,55 @@
-﻿using GlyphRasterizer.Lookup.Format;
-using GlyphRasterizer.Lookup.Format.Image;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.Format;
+﻿using GlyphRasterizer.Configuration;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormat;
+using ImageMagick;
 using Resources.Messages;
 using System.Collections.Immutable;
 using Tests.Common.Prompting.Parsing;
 
 namespace Tests.Unit.Prompting.Parsing;
 
-public sealed class ImageFormatParserUnitTests : ParserTestBase<ImageFormatParser, string, ImmutableArray<ImageFormat>?>
+public sealed class ImageFormatParserUnitTests : ParserTestBase<ImageFormatParser, string, ImmutableArray<MagickFormat>?>
 {
     protected override ImageFormatParser Parser { get; } = new();
 
-    private static readonly ImmutableArray<ImageFormat> _allImageFormats = [.. Enum.GetValues<ImageFormat>()];
-
     private const string InvalidImageFormat = "InvalidImageFormat";
-
-    private static readonly string _invalidFormatsErrorMessage = string.Format(
-        ErrorMessages.InvalidFormats_FormatString,
-        $"'{InvalidImageFormat}'"
-    );
+    private static readonly string _invalidFormatsErrorMessage = string.Format(ErrorMessages.InvalidFormats_FormatString, $"'{InvalidImageFormat}'");
 
     [Theory]
     [MemberData(nameof(EmptyStringInput))]
-    public void TryParse_Should_ReturnEmptyInputError_When_InputIsEmpty(string input) =>
-        AssertParseFailure(input, ErrorMessages.EmptyInput);
+    public void TryParse_Should_ReturnEmptyInputError_When_InputIsEmpty(string input) => AssertParseFailure(input, ErrorMessages.EmptyInput);
 
     [Fact]
-    public void TryParse_Should_ReturnTrue_When_InputIsEachFormatRepresentation()
+    public void TryParse_Should_ReturnTrue_When_InputIsEachFormat()
     {
-        foreach ((ImageFormat format, FormatLookupData formatData) in ImageFormatDataLookup.Lookup)
+        foreach (MagickFormat format in AppConfig.AvailableImageFormats)
         {
-            foreach (string representation in formatData.Representations)
-            {
-                AssertParseSuccess(representation.ToLowerInvariant(), [format]); // lowercase
-                AssertParseSuccess(representation.ToUpperInvariant(), [format]); // uppercase
-                AssertParseSuccess($" {representation} ", [format]); // extra whitespace
-            }
+            AssertParseSuccess(format.ToString().ToLower(), [format]);
+            AssertParseSuccess(format.ToString().ToUpper(), [format]);
+            AssertParseSuccess($" {format} ", [format]);
         }
     }
 
-    public static readonly TheoryData<string, ImmutableArray<ImageFormat>> ValidInput =
-        new()
+    public static readonly TheoryData<string, ImmutableArray<MagickFormat>> ValidInput = new()
         {
-            { "PNG,JPG", [ ImageFormat.Png, ImageFormat.Jpeg] }, // multiple
-            { "png,jpg", [ ImageFormat.Png, ImageFormat.Jpeg] }, // multiple lowercase 
-            { " PNG , JPG ", [ ImageFormat.Png, ImageFormat.Jpeg] }, // multiple whitespace
-            { "PNG,PNG", [ ImageFormat.Png ] }, // same representation
-            { "JPG,JPEG", [ ImageFormat.Jpeg ] }, // different representation
-            { "ALL", _allImageFormats }, // all
-            { " ALL ", _allImageFormats }, // all extra whitespace
-            { "all ", _allImageFormats } // all lowercase
+            { "PNG,JPEG", [MagickFormat.Png, MagickFormat.Jpeg] },     // multiple
+            { "png,jpeg", [MagickFormat.Png, MagickFormat.Jpeg] },     // multiple + lowercase 
+            { " PNG , JPEG ", [MagickFormat.Png, MagickFormat.Jpeg] }, // multiple + extra whitespace
+            { "PNG,PNG", [MagickFormat.Png] }                          // duplicate input token
         };
 
-    public static readonly TheoryData<string> InvalidInput =
-        new()
+    public static readonly TheoryData<string> InvalidInput = new()
         {
-            { InvalidImageFormat},
-            { $"{_allImageFormats.FirstOrDefault()},{InvalidImageFormat}"}, // mixed valid + invalid
-            { $" {_allImageFormats.FirstOrDefault()} , {InvalidImageFormat} "} // mixed valid + invalid + extra whitespace
+            { InvalidImageFormat },
+            { $"{AppConfig.AvailableImageFormats.FirstOrDefault()},{InvalidImageFormat}" },    // valid + invalid
+            { $" {AppConfig.AvailableImageFormats.FirstOrDefault()} , {InvalidImageFormat} " } // valid + invalid + extra whitespace
         };
 
     [Theory]
     [MemberData(nameof(ValidInput))]
-    public void TryParse_Should_ReturnTrue_When_InputIsValid(string input, ImmutableArray<ImageFormat> expectedValue) =>
+    public void TryParse_Should_ReturnTrue_When_InputIsValid(string input, ImmutableArray<MagickFormat> expectedValue) =>
         AssertParseSuccess(input, expectedValue);
 
     [Theory]
     [MemberData(nameof(InvalidInput))]
-    public void TryParse_Should_ReturnInvalidFormatsError_When_InputIsInvalid(string input) =>
-        AssertParseFailure(input, _invalidFormatsErrorMessage);
+    public void TryParse_Should_ReturnInvalidFormatsError_When_InputIsInvalid(string input) => AssertParseFailure(input, _invalidFormatsErrorMessage);
 }

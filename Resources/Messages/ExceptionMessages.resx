@@ -131,7 +131,4 @@
   <data name="NoEncodableFrames" xml:space="preserve">
     <value>No frames to encode.</value>
   </data>
-  <data name="UnexpectedType_FormatString" xml:space="preserve">
-    <value>Unexpected type: expected {0}, got {1}.</value>
-  </data>
 </root>

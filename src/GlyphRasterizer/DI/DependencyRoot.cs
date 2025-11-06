@@ -2,9 +2,9 @@
 
 namespace GlyphRasterizer.DI;
 
-public static class DependencyRoot
+internal static class DependencyRoot
 {
-    public static ServiceProvider BuildServiceProvider()
+    internal static ServiceProvider BuildServiceProvider()
     {
         var services = new ServiceCollection();
         services.AddGlyphRasterizer();

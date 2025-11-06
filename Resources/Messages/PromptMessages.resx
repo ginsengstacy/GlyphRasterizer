@@ -118,22 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Color" xml:space="preserve">
-    <value>Enter color as name (e.g., Red) or hexadecimal code (e.g., #FF0000):</value>
+    <value>Enter color as name (e.g., Red) or hexadecimal code (e.g., #FFFF0000):</value>
   </data>
   <data name="FileAlreadyExists_FormatString" xml:space="preserve">
     <value>{0} already exists. Overwrite? (Y/N, Ctrl+Y = yes to all, Ctrl+N = no to all)</value>
   </data>
-  <data name="FontPath_FormatString" xml:space="preserve">
-    <value>Enter font file path (e.g., C:\Users\Alice\Fonts\Arial.ttf). Available: {0}.{1}Font path:</value>
-    <comment>1 = \n</comment>
+  <data name="Font" xml:space="preserve">
+    <value>Enter font path (e.g., C:\Users\Alice\Fonts\Arial.ttf):</value>
   </data>
-  <data name="Glyph_FormatString" xml:space="preserve">
-    <value>Enter glyph(s): single (e.g., A) or multiple (e.g., ABC).{0}Glyph(s):</value>
+  <data name="UnicodeChar_FormatString" xml:space="preserve">
+    <value>Enter unicode char(s) (single: e.g., A; multiple: e.g., ABC).{0}Unicode char(s):</value>
     <comment>0 = \n</comment>
   </data>
   <data name="ImageFormat_FormatString" xml:space="preserve">
-    <value>Enter format(s): single (e.g., {0}), multiple (e.g., {0}, {1}), or 'All'. Options: {2}.{3}Format(s):</value>
-    <comment>3 = \n</comment>
+    <value>Enter image format(s) (single: e.g., {0}; multiple: e.g., {0},{1}).{2}Available: {3}{4}Format(s):</value>
+    <comment>2,4 = \n</comment>
   </data>
   <data name="OutputDirectory" xml:space="preserve">
     <value>Enter output directory (e.g., C:\Users\Alice\Output):</value>
@@ -142,6 +141,6 @@
     <value>Restart process? (Y/N, Ctrl+Y = reuse previous font &amp; output directory)</value>
   </data>
   <data name="Size_FormatString" xml:space="preserve">
-    <value>Enter image size ({0}-{1} px):</value>
+    <value>Enter image size ({0}-{1}px):</value>
   </data>
 </root>

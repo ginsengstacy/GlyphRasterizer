@@ -1,11 +1,12 @@
 ﻿using GlyphRasterizer.Configuration;
 using GlyphRasterizer.Prompting.PromptAction;
+using GlyphRasterizer.Terminal;
 using Resources.Messages;
 
 namespace GlyphRasterizer.Prompting.Prompts.InputType.String.OutputDirectory;
 
-public sealed class OutputDirectoryPrompt(OutputDirectoryParser outputDirectoryParser, PromptActionParser promptActionParser)
-    : PromptBase<string, string?>(promptActionParser)
+public sealed class OutputDirectoryPrompt(OutputDirectoryParser outputDirectoryParser, CommandTypeParser commandTypeParser)
+    : PromptBase<string, string?>(commandTypeParser)
 {
     protected override string Message => PromptMessages.OutputDirectory;
     protected override Func<string> GetInput => ConsoleHelpers.ReadLineSafe;

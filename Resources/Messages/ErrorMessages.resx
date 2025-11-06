@@ -123,9 +123,6 @@
   <data name="PathNotFound" xml:space="preserve">
     <value>Specified path does not exist.</value>
   </data>
-  <data name="InvalidFileExtension" xml:space="preserve">
-    <value>Invalid file extension.</value>
-  </data>
   <data name="InvalidFormat" xml:space="preserve">
     <value>Invalid Format.</value>
   </data>
@@ -141,13 +138,7 @@
   <data name="InvalidFormats_FormatString" xml:space="preserve">
     <value>Invalid format(s): {0}.</value>
   </data>
-  <data name="InvalidGlyphCount" xml:space="preserve">
-    <value>Input must be a single glyph (BMP or surrogate pair).</value>
-  </data>
-  <data name="NoPreviousContext" xml:space="preserve">
-    <value>No previous session context available to reuse.</value>
-  </data>
-  <data name="FailedToLoadFont" xml:space="preserve">
-    <value>Failed to load font.</value>
+  <data name="SizeTooLargeForIco_FormatString" xml:space="preserve">
+    <value>Size too large for ICO format. Maximum allowed size is {0}px.</value>
   </data>
 </root>

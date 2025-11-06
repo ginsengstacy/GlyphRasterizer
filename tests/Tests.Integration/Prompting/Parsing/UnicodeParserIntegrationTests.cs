@@ -1,0 +1,126 @@
+﻿using FluentAssertions;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.UnicodeChar;
+using Resources;
+using Resources.Messages;
+using System.Collections.Immutable;
+using System.Text;
+using System.Windows.Media;
+using Tests.Common.Prompting.Parsing;
+
+namespace Tests.Integration.Prompting.Parsing;
+
+public sealed class UnicodeParserIntegrationTests : ParserTestBase<UnicodeCharParser, string, ImmutableArray<UnicodeChar>?>
+{
+    protected override UnicodeCharParser Parser { get; } = new();
+
+    private const string UncontainedGlyph1 = "𐀀";
+    private const string UncontainedGlyph2 = "𐀁";
+
+    private static readonly string _unifontPath = ResourceHelpers.GetFullPath("Fonts/Unifont.otf");
+    private static readonly GlyphTypeface _unifont = new(new Uri(_unifontPath));
+
+    public static readonly TheoryData<string, string> UncontainedGlyphInput = new()
+    {
+        {
+            UncontainedGlyph1,
+            string.Format(
+                ErrorMessages.UncontainedGlyphs_FormatString,
+                _unifont.FamilyNames.Values.First() ?? SentinelStrings.UnknownFontName,
+                $"'{UncontainedGlyph1}'"
+            )
+        },
+        {
+            "A" + UncontainedGlyph1,
+            string.Format(
+                ErrorMessages.UncontainedGlyphs_FormatString,
+                _unifont.FamilyNames.Values.First() ?? SentinelStrings.UnknownFontName,
+                $"'{UncontainedGlyph1}'"
+            )
+        },
+        {
+            UncontainedGlyph1 + UncontainedGlyph2,
+            string.Format(
+                ErrorMessages.UncontainedGlyphs_FormatString,
+                _unifont.FamilyNames.Values.First() ?? SentinelStrings.UnknownFontName,
+                $"'{UncontainedGlyph1}', '{UncontainedGlyph2}'"
+            )
+        }
+    };
+
+    [Theory]
+    [MemberData(nameof(EmptyStringInput))]
+    public void TryParse_Should_ReturnEmptyInputError_When_InputIsEmpty(string input) =>
+        AssertParseFailure(input, ErrorMessages.EmptyInput, _unifont);
+
+    [Theory]
+    [MemberData(nameof(UncontainedGlyphInput))]
+    public void TryParse_Should_ReturnUncontainedGlyphsError_When_InputContainsUncontainedGlyphs(string input, string expectedMessage) =>
+        AssertParseFailure(input, expectedMessage, _unifont);
+
+    [Theory]
+    [InlineData("A")]
+    [InlineData("z")]
+    [InlineData("0")]
+    [InlineData("!")]
+    [InlineData("~")]
+    [InlineData("Ω")]
+    [InlineData("Я")]
+    [InlineData("字")]
+    public void TryParse_Should_ReturnTrue_When_InputIsSingleBMPChar(string input) =>
+        AssertParseSuccess(input, [new UnicodeChar(input)], _unifont);
+
+    [Theory]
+    [InlineData("🄯")]
+    [InlineData("𠀋")]
+    [InlineData("𲍿")]
+    public void TryParse_Should_ReturnTrue_When_InputIsSingleSMPChar(string input) =>
+        AssertParseSuccess(input, [new UnicodeChar(input)], _unifont);
+
+    [Theory]
+    [InlineData("é")]
+    [InlineData("ö")]
+    [InlineData("ñ")]
+    public void TryParse_Should_ReturnTrue_When_InputIsComposedChar(string input) =>
+        AssertParseSuccess(input, [new UnicodeChar(input)], _unifont);
+
+    [Theory]
+    [InlineData("ABC")]
+    [InlineData("A B C")]
+    [InlineData("あいう")]
+    [InlineData("妈汉龙")]
+    public void TryParse_Should_ReturnTrue_When_InputHasMultipleDistinctGlyphs(string input) =>
+        AssertParseSuccess(input, [.. input.Where(c => !char.IsWhiteSpace(c)).Select(c => new UnicodeChar(c.ToString()))], _unifont);
+
+    [Theory]
+    [InlineData(" A")]
+    [InlineData("A ")]
+    public void TryParse_Should_ReturnTrue_When_InputHasExtraWhitespace(string input) =>
+        AssertParseSuccess(input, [new UnicodeChar(input.Trim())], _unifont);
+
+    [Theory]
+    [InlineData("AAA")]
+    [InlineData("AABBCC")]
+    [InlineData(" A A ")]
+    [InlineData("AA BB CC")]
+    [InlineData("ああいいうう")]
+    [InlineData("妈妈汉汉龙龙")]
+    public void TryParse_Should_ReturnTrue_When_InputHasDuplicateGlyphs(string input)
+    {
+        Rune[] distinctRunes = [.. input.EnumerateRunes().Where(r => !Rune.IsWhiteSpace(r)).Distinct()];
+        ImmutableArray<UnicodeChar> expectedGlyphs = [.. distinctRunes.Select(r => new UnicodeChar(r.ToString()))];
+        AssertParseSuccess(input, expectedGlyphs, _unifont);
+    }
+
+    [Fact]
+    public void TryParse_Should_NormalizeCompositionallyEquivalentGlyphs_ToSameCanonicalForm()
+    {
+        const string composed = "é";
+        const string decomposed = "e\u0301";
+        AssertParseSuccess(composed + decomposed, [new UnicodeChar(composed)], _unifont);
+    }
+
+    [Theory]
+    [InlineData("A")]
+    public void TryParse_Should_ReturnTrue_When_InputConsistsOfThousandsOfGlyphs(string input) =>
+        AssertParseSuccess(new string(input[0], 10_000), [new UnicodeChar(input)], _unifont);
+}

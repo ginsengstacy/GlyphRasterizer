@@ -1,4 +1,5 @@
 ﻿using GlyphRasterizer.DI;
+using GlyphRasterizer.Terminal;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text;
 
@@ -6,7 +7,7 @@ namespace GlyphRasterizer;
 
 public static class Program
 {
-    private static void Main(string[] args)
+    public static void Main(string[] args)
     {
         ServiceProvider provider = DependencyRoot.BuildServiceProvider();
 

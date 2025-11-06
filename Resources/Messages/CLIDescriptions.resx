@@ -118,21 +118,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Color" xml:space="preserve">
-    <value>Color as name (e.g., Red) or hexadecimal code (e.g., #FF0000).</value>
+    <value>Color as name or hexadecimal code.</value>
   </data>
-  <data name="FontPath_FormatString" xml:space="preserve">
-    <value>Font file (e.g., C:\Users\Alice\Fonts\Arial.ttf). Available: {0}.</value>
+  <data name="Font" xml:space="preserve">
+    <value>Font file.</value>
   </data>
   <data name="ImageFormat_FormatString" xml:space="preserve">
-    <value>Output image format(s) to generate. Single (e.g., {0}), multiple (e.g., {0}, {1}), or 'All'. Available: {2}.</value>
+    <value>Output image format(s) to generate (single: e.g., {0}; multiple: e.g., {0},{1}).{2}Available: {3}</value>
+    <comment>2 = \n</comment>
   </data>
-  <data name="Glyph" xml:space="preserve">
-    <value>Gyph(s) to render. Single (e.g., A) or multiple (e.g., ABC).</value>
+  <data name="UnicodeChar" xml:space="preserve">
+    <value>Unicode char(s) to render (single: e.g., A; multiple: e.g., ABC).</value>
   </data>
   <data name="OutputDirectory" xml:space="preserve">
-    <value>Target directory for output image (e.g., C:\Users\Alice\Output).</value>
+    <value>Target directory for output images.</value>
   </data>
-  <data name="Size_FormatString" xml:space="preserve">
-    <value>Square image size ({0}-{1} px).</value>
+  <data name="ImageSize_FormatString" xml:space="preserve">
+    <value>Square image size ({0}-{1}px).</value>
   </data>
 </root>

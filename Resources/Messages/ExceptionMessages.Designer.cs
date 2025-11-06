@@ -95,14 +95,5 @@ namespace Resources.Messages {
                 return ResourceManager.GetString("NoEncodableFrames", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unexpected type: expected {0}, got {1}..
-        /// </summary>
-        public static string UnexpectedType_FormatString {
-            get {
-                return ResourceManager.GetString("UnexpectedType_FormatString", resourceCulture);
-            }
-        }
     }
 }

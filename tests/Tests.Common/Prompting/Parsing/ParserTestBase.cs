@@ -18,18 +18,18 @@ public abstract class ParserTestBase<TParser, TInput, TValue>
         { "\n" }
     };
 
-    protected void AssertParseSuccess(TInput input, TValue expectedValue)
+    protected void AssertParseSuccess(TInput input, TValue expectedValue, object? additionalContext = null)
     {
-        bool success = Parser.TryParse(input, out TValue? parsed, out string? errorMessage);
+        bool success = Parser.TryParse(input, out TValue? parsed, out string? errorMessage, additionalContext);
 
         success.Should().BeTrue();
         parsed.Should().BeEquivalentTo(expectedValue);
         errorMessage.Should().BeNull();
     }
 
-    protected void AssertParseFailure(TInput input, string expectedMessage, bool errorMessageShouldMatchFormat = false)
+    protected void AssertParseFailure(TInput input, string expectedMessage, object? additionalContext = null, bool errorMessageShouldMatchFormat = false)
     {
-        bool success = Parser.TryParse(input, out TValue? parsed, out string? errorMessage);
+        bool success = Parser.TryParse(input, out TValue? parsed, out string? errorMessage, additionalContext);
 
         success.Should().BeFalse();
         parsed.Should().BeNull();

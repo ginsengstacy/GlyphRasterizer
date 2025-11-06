@@ -79,15 +79,6 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Created directory at {0}..
-        /// </summary>
-        public static string CreatedDirectory_FormatString {
-            get {
-                return ResourceManager.GetString("CreatedDirectory_FormatString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Done!.
         /// </summary>
         public static string OperationComplete {

@@ -61,7 +61,7 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter color as name (e.g., Red) or hexadecimal code (e.g., #FF0000):.
+        ///   Looks up a localized string similar to Enter color as name (e.g., Red) or hexadecimal code (e.g., #FFFF0000):.
         /// </summary>
         public static string Color {
             get {
@@ -79,25 +79,16 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter font file path (e.g., C:\Users\Alice\Fonts\Arial.ttf). Available: {0}.{1}Font path:.
+        ///   Looks up a localized string similar to Enter font path (e.g., C:\Users\Alice\Fonts\Arial.ttf):.
         /// </summary>
-        public static string FontPath_FormatString {
+        public static string Font {
             get {
-                return ResourceManager.GetString("FontPath_FormatString", resourceCulture);
+                return ResourceManager.GetString("Font", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter glyph(s): single (e.g., A) or multiple (e.g., ABC).{0}Glyph(s):.
-        /// </summary>
-        public static string Glyph_FormatString {
-            get {
-                return ResourceManager.GetString("Glyph_FormatString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter format(s): single (e.g., {0}), multiple (e.g., {0}, {1}), or &apos;All&apos;. Options: {2}.{3}Format(s):.
+        ///   Looks up a localized string similar to Enter image format(s) (single: e.g., {0}; multiple: e.g., {0},{1}).{2}Available: {3}{4}Format(s):.
         /// </summary>
         public static string ImageFormat_FormatString {
             get {
@@ -124,11 +115,20 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter image size ({0}-{1} px):.
+        ///   Looks up a localized string similar to Enter image size ({0}-{1}px):.
         /// </summary>
         public static string Size_FormatString {
             get {
                 return ResourceManager.GetString("Size_FormatString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter unicode char(s) (single: e.g., A; multiple: e.g., ABC).{0}Unicode char(s):.
+        /// </summary>
+        public static string UnicodeChar_FormatString {
+            get {
+                return ResourceManager.GetString("UnicodeChar_FormatString", resourceCulture);
             }
         }
     }

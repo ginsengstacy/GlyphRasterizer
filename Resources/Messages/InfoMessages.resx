@@ -123,9 +123,6 @@
   <data name="AvailableCommands_FormatString" xml:space="preserve">
     <value>Commands: {0}</value>
   </data>
-  <data name="CreatedDirectory_FormatString" xml:space="preserve">
-    <value>Created directory at {0}.</value>
-  </data>
   <data name="OperationComplete" xml:space="preserve">
     <value>Done!</value>
   </data>

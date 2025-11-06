@@ -8,8 +8,8 @@ public sealed class RestartParserUnitTests : ParserTestBase<RestartParser, Conso
     protected override RestartParser Parser { get; } = new();
 
     [Theory]
-    [InlineData(ConsoleKey.Y, false, RestartPromptResultType.RestartWithoutPreviousContext)]
-    [InlineData(ConsoleKey.Y, true, RestartPromptResultType.RestartWithPreviousContext)]
+    [InlineData(ConsoleKey.Y, false, RestartPromptResultType.RestartWithoutPreviousFontAndOutputDirectory)]
+    [InlineData(ConsoleKey.Y, true, RestartPromptResultType.RestartWithPreviousFontAndOutputDirectory)]
     [InlineData(ConsoleKey.N, false, RestartPromptResultType.Quit)]
     [InlineData(ConsoleKey.N, true, RestartPromptResultType.Quit)]
     public void TryParse_Should_ReturnTrue_When_InputIsValid(ConsoleKey key, bool ctrl, RestartPromptResultType expectedResult)

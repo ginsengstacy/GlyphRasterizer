@@ -3,7 +3,7 @@ using GlyphRasterizer.Prompting.PromptAction;
 
 namespace GlyphRasterizer.Prompting.Prompts;
 
-public abstract class PromptBase<TInput, TValue>(PromptActionParser promptActionParser) : IPrompt where TInput : notnull
+public abstract class PromptBase<TInput, TValue>(CommandTypeParser commandTypeParser) : IPrompt where TInput : notnull
 {
     protected abstract string Message { get; }
     protected abstract Func<TInput> GetInput { get; }
@@ -11,27 +11,35 @@ public abstract class PromptBase<TInput, TValue>(PromptActionParser promptAction
     protected virtual IPromptValueValidator<TValue>? Validator { get; } = null;
     protected virtual Action<SessionContext, TValue>? ValueUpdater { get; } = null;
 
-    protected readonly PromptActionParser _promptActionParser = promptActionParser;
+    protected readonly CommandTypeParser _commandTypeParser = commandTypeParser;
 
+    public object? AdditionalParsingContext;
+    public object? AdditionalValidationContext;
     public object[] RuntimeMessageParameters = [];
 
-    private TValue? _lastParsedAndValidValue;
+    private TValue? _previousParsedAndValidValue;
 
     public PromptResult Execute()
     {
-        Console.Write($"{string.Format(Message, RuntimeMessageParameters)} ");
-        TInput rawInput = GetInput();
+        Console.Write(Message, RuntimeMessageParameters + " ");
+        TInput input = GetInput();
 
-        if (rawInput is string stringInput && _promptActionParser.TryParse(stringInput, out PromptActionType actionType, out _))
-            return new PromptResult(actionType);
+        if (input is string stringInput && _commandTypeParser.TryParse(stringInput, out CommandType? commandType, out _))
+        {
+            return new PromptResult(commandType!.Value);
+        }
 
-        if (!Parser.TryParse(rawInput, out TValue? value, out string? errorMessage))
+        if (!Parser.TryParse(input, out TValue? value, out string? errorMessage, AdditionalParsingContext))
+        {
             return Retry(errorMessage!);
+        }
 
-        if (Validator is not null && !Validator.IsValid(value!, out errorMessage))
+        if (Validator is not null && !Validator.IsValid(value!, out errorMessage, AdditionalValidationContext))
+        {
             return Retry(errorMessage!);
+        }
 
-        _lastParsedAndValidValue = value!;
+        _previousParsedAndValidValue = value!;
         return Success(value!);
 
         PromptResult Success(TValue value) => new(PromptActionType.Continue, value!);
@@ -40,7 +48,9 @@ public abstract class PromptBase<TInput, TValue>(PromptActionParser promptAction
 
     public void UpdateContextWithParsedAndValidValue(SessionContext context)
     {
-        if (_lastParsedAndValidValue is not null)
-            ValueUpdater?.Invoke(context, _lastParsedAndValidValue);
+        if (_previousParsedAndValidValue is not null)
+        {
+            ValueUpdater?.Invoke(context, _previousParsedAndValidValue);
+        }
     }
 }

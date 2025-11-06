@@ -10,6 +10,5 @@ public sealed class OutputDirectoryParserUnitTests : ParserTestBase<OutputDirect
 
     [Theory]
     [MemberData(nameof(EmptyStringInput))]
-    public void TryParse_Should_ReturnEmptyInputError_When_InputIsEmpty(string input) =>
-        AssertParseFailure(input, ErrorMessages.EmptyInput);
+    public void TryParse_Should_ReturnEmptyInputError_When_InputIsEmpty(string input) => AssertParseFailure(input, ErrorMessages.EmptyInput);
 }

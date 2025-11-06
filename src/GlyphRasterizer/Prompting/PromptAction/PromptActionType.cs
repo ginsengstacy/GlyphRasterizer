@@ -3,8 +3,5 @@
 public enum PromptActionType
 {
     Continue,
-    Retry,
-    GoBack,
-    Restart,
-    Quit
+    Retry
 }

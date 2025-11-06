@@ -18,8 +18,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>CLIDescriptions.resx</DependentUpon>
     </Compile>
-    <Compile Update="Messages\SentinelMessages.Designer.cs">
-      <DependentUpon>SentinelMessages.resx</DependentUpon>
+    <Compile Update="Messages\SentinelStrings.Designer.cs">
+      <DependentUpon>SentinelStrings.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
@@ -50,8 +50,8 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CLIDescriptions.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Messages\SentinelMessages.resx">
-      <LastGenOutput>SentinelMessages.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="Messages\SentinelStrings.resx">
+      <LastGenOutput>SentinelStrings.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Messages\ErrorMessages.resx">

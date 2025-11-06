@@ -1,11 +1,12 @@
 ﻿using GlyphRasterizer.Configuration;
 using GlyphRasterizer.Prompting.PromptAction;
+using GlyphRasterizer.Terminal;
 using Resources.Messages;
 
 namespace GlyphRasterizer.Prompting.Prompts.InputType.Key.OverwriteFile;
 
-public sealed class FileOverwritePrompt(FileOverwriteParser fileOverwriteParser, PromptActionParser promptActionParser)
-    : PromptBase<ConsoleKeyInfo, FileOverwriteResult?>(promptActionParser)
+public sealed class FileOverwritePrompt(FileOverwriteParser fileOverwriteParser, CommandTypeParser commandTypeParser)
+    : PromptBase<ConsoleKeyInfo, FileOverwriteResult?>(commandTypeParser)
 {
     protected override string Message => PromptMessages.FileAlreadyExists_FormatString;
     protected override Func<ConsoleKeyInfo> GetInput => () => ConsoleHelpers.ReadKeyLine(intercept: true);

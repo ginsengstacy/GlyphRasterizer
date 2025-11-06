@@ -61,7 +61,7 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Color as name (e.g., Red) or hexadecimal code (e.g., #FF0000)..
+        ///   Looks up a localized string similar to Color as name or hexadecimal code..
         /// </summary>
         public static string Color {
             get {
@@ -70,25 +70,16 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Font file (e.g., C:\Users\Alice\Fonts\Arial.ttf). Available: {0}..
+        ///   Looks up a localized string similar to Font file..
         /// </summary>
-        public static string FontPath_FormatString {
+        public static string Font {
             get {
-                return ResourceManager.GetString("FontPath_FormatString", resourceCulture);
+                return ResourceManager.GetString("Font", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gyph(s) to render. Single (e.g., A) or multiple (e.g., ABC)..
-        /// </summary>
-        public static string Glyph {
-            get {
-                return ResourceManager.GetString("Glyph", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Output image format(s) to generate. Single (e.g., {0}), multiple (e.g., {0}, {1}), or &apos;All&apos;. Available: {2}..
+        ///   Looks up a localized string similar to Output image format(s) to generate (single: e.g., {0}; multiple: e.g., {0},{1}).{2}Available: {3}.
         /// </summary>
         public static string ImageFormat_FormatString {
             get {
@@ -97,7 +88,16 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Target directory for output image (e.g., C:\Users\Alice\Output)..
+        ///   Looks up a localized string similar to Square image size ({0}-{1}px)..
+        /// </summary>
+        public static string ImageSize_FormatString {
+            get {
+                return ResourceManager.GetString("ImageSize_FormatString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target directory for output images..
         /// </summary>
         public static string OutputDirectory {
             get {
@@ -106,11 +106,11 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Square image size ({0}-{1} px)..
+        ///   Looks up a localized string similar to Unicode char(s) to render (single: e.g., A; multiple: e.g., ABC)..
         /// </summary>
-        public static string Size_FormatString {
+        public static string UnicodeChar {
             get {
-                return ResourceManager.GetString("Size_FormatString", resourceCulture);
+                return ResourceManager.GetString("UnicodeChar", resourceCulture);
             }
         }
     }

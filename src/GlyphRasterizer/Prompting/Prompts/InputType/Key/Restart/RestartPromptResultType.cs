@@ -2,7 +2,7 @@
 
 public enum RestartPromptResultType
 {
-    RestartWithPreviousContext,
-    RestartWithoutPreviousContext,
+    RestartWithPreviousFontAndOutputDirectory,
+    RestartWithoutPreviousFontAndOutputDirectory,
     Quit
 }

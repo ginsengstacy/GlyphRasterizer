@@ -1,52 +1,56 @@
 ﻿using GlyphRasterizer.Configuration;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageSize;
+using ImageMagick;
 using Resources.Messages;
+using System.Collections.Immutable;
 using Tests.Common.Prompting.Validation;
 
 namespace Tests.Unit.Prompting.Validation;
 
-public sealed class ImageSizeValidatorUnitTests : ValidatorTestBase<ImageSizeValidator, int?>
+public sealed class ImageSizeValidatorUnitTests : ValidatorTestBase<ImageSizeValidator, uint?>
 {
     protected override ImageSizeValidator Validator { get; } = new();
 
-    public static IEnumerable<object[]> ValidSizes()
+    [Fact]
+    public void IsValid_Should_ReturnEmptyInputError_When_InputIsNull() => AssertValidationFailure(null, ErrorMessages.EmptyInput);
+
+    [Fact]
+    public void IsValid_Should_ReturnSizeTooSmallError_When_InputIsSmallerThanMinimumSize_AndFormatIsNotIco()
     {
-        yield return new object[] { Config.MinImageSize + 1 };
-        yield return new object[] { (Config.MinImageSize + Config.MaxImageSize) / 2 };
-        yield return new object[] { Config.MaxImageSize - 1 };
+        uint tooSmall = AppConfig.MinImageSize - 1;
+        string expectedMessage = string.Format(ErrorMessages.SizeTooSmall_FormatString, AppConfig.MinImageSize);
+        AssertValidationFailure(tooSmall, expectedMessage, ImmutableArray.Create(MagickFormat.Png));
     }
 
     [Fact]
-    public void IsValid_Should_ReturnEmptyInputError_When_InputIsNull() =>
-        AssertValidationFailure(null, ErrorMessages.EmptyInput);
-
-    [Fact]
-    public void IsValid_Should_ReturnSizeTooSmallError_When_InputIsSmallerThanMinimum()
+    public void IsValid_Should_ReturnSizeTooLargeError_When_InputIsLargerThanMaximumSize_AndFormatIsNotIco()
     {
-        int tooSmall = Config.MinImageSize - 1;
-        string expectedMessage = string.Format(ErrorMessages.SizeTooSmall_FormatString, Config.MinImageSize);
-        AssertValidationFailure(tooSmall, expectedMessage);
+        uint tooLarge = AppConfig.MaxImageSize + 1;
+        string expectedMessage = string.Format(ErrorMessages.SizeTooLarge_FormatString, AppConfig.MaxImageSize);
+        AssertValidationFailure(tooLarge, expectedMessage, ImmutableArray.Create(MagickFormat.Png));
     }
 
     [Fact]
-    public void IsValid_Should_ReturnSizeTooLargeError_When_InputIsLargerThanMaximum()
+    public void IsValid_Should_ReturnSizeTooLargeForIcoError_When_InputIsLargerThanMaximumIcoSize_AndFormatIsIco()
     {
-        int tooLarge = Config.MaxImageSize + 1;
-        string expectedMessage = string.Format(ErrorMessages.SizeTooLarge_FormatString, Config.MaxImageSize);
-        AssertValidationFailure(tooLarge, expectedMessage);
+        uint tooLarge = AppConfig.MaxIcoSize + 1;
+        string expectedMessage = string.Format(ErrorMessages.SizeTooLargeForIco_FormatString, AppConfig.MaxIcoSize);
+        AssertValidationFailure(tooLarge, expectedMessage, ImmutableArray.Create(MagickFormat.Ico));
     }
 
-    [Theory]
-    [MemberData(nameof(ValidSizes))]
-    public void IsValid_Should_ReturnTrue_When_InputIsWithinAllowedRange(int validSize) =>
-        AssertValidationSuccess(validSize);
+    [Fact]
+    public void IsValid_Should_ReturnTrue_When_InputEqualsMinimumSize_AndFormatIsNotIco() =>
+        AssertValidationSuccess(AppConfig.MinImageSize, ImmutableArray.Create(MagickFormat.Png));
 
     [Fact]
-    public void IsValid_Should_ReturnTrue_When_InputEqualsMinimum() =>
-        AssertValidationSuccess(Config.MinImageSize);
+    public void IsValid_Should_ReturnTrue_When_InputEqualsMinimumSize_AndFormatIsIco() =>
+    AssertValidationSuccess(AppConfig.MinImageSize, ImmutableArray.Create(MagickFormat.Ico));
 
     [Fact]
-    public void IsValid_Should_ReturnTrue_When_InputEqualsMaximum() =>
-        AssertValidationSuccess(Config.MaxImageSize);
+    public void IsValid_Should_ReturnTrue_When_InputEqualsMaximumSize_AndFormatIsNotIco() =>
+        AssertValidationSuccess(AppConfig.MaxImageSize, ImmutableArray.Create(MagickFormat.Png));
 
+    [Fact]
+    public void IsValid_Should_ReturnTrue_When_InputEqualsMaximumIcoSize_AndFormatIsIco() =>
+        AssertValidationSuccess(AppConfig.MaxIcoSize, ImmutableArray.Create(MagickFormat.Ico));
 }

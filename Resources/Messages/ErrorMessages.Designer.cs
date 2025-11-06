@@ -70,24 +70,6 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to load font..
-        /// </summary>
-        public static string FailedToLoadFont {
-            get {
-                return ResourceManager.GetString("FailedToLoadFont", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Invalid file extension..
-        /// </summary>
-        public static string InvalidFileExtension {
-            get {
-                return ResourceManager.GetString("InvalidFileExtension", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Invalid Format..
         /// </summary>
         public static string InvalidFormat {
@@ -106,24 +88,6 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Input must be a single glyph (BMP or surrogate pair)..
-        /// </summary>
-        public static string InvalidGlyphCount {
-            get {
-                return ResourceManager.GetString("InvalidGlyphCount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No previous session context available to reuse..
-        /// </summary>
-        public static string NoPreviousContext {
-            get {
-                return ResourceManager.GetString("NoPreviousContext", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Specified path does not exist..
         /// </summary>
         public static string PathNotFound {
@@ -138,6 +102,15 @@ namespace Resources.Messages {
         public static string SizeTooLarge_FormatString {
             get {
                 return ResourceManager.GetString("SizeTooLarge_FormatString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Size too large for ICO format. Maximum allowed size is {0}px..
+        /// </summary>
+        public static string SizeTooLargeForIco_FormatString {
+            get {
+                return ResourceManager.GetString("SizeTooLargeForIco_FormatString", resourceCulture);
             }
         }
         

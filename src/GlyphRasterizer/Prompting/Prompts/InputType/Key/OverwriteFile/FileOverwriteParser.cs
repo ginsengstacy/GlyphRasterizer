@@ -4,7 +4,7 @@ namespace GlyphRasterizer.Prompting.Prompts.InputType.Key.OverwriteFile;
 
 public sealed class FileOverwriteParser : IPromptInputParser<ConsoleKeyInfo, FileOverwriteResult?>
 {
-    public bool TryParse(ConsoleKeyInfo input, out FileOverwriteResult? value, out string? errorMessage)
+    public bool TryParse(ConsoleKeyInfo input, out FileOverwriteResult? value, out string? errorMessage, object? additionalContext = null)
     {
         errorMessage = null;
 

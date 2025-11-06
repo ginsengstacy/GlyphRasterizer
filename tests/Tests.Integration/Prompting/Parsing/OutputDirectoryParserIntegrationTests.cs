@@ -13,12 +13,11 @@ public sealed class OutputDirectoryPromptIntegrationTests : ParserTestBase<Outpu
     public static readonly TheoryData<string> ValidOutputDirectory = new()
     {
         { _outputDirectory },
-        { $"\"{_outputDirectory}\"" },
-        { $"{_outputDirectory}\\" }
+        { $"\"{_outputDirectory}\"" }, 
+        { $"{_outputDirectory}\\" }   
     };
 
     [Theory]
     [MemberData(nameof(ValidOutputDirectory))]
-    public void TryParse_Should_ReturnTrue_When_OutputDirectoryIsValid(string outputDir) =>
-        AssertParseSuccess(outputDir, _outputDirectory);
+    public void TryParse_Should_ReturnTrue_When_OutputDirectoryIsValid(string outputDir) => AssertParseSuccess(outputDir, _outputDirectory);
 }

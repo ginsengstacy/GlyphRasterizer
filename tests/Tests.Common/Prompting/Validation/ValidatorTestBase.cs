@@ -8,17 +8,17 @@ public abstract class ValidatorTestBase<TValidator, TValue> where TValidator : I
 {
     protected abstract TValidator Validator { get; }
 
-    protected void AssertValidationSuccess(TValue value)
+    protected void AssertValidationSuccess(TValue value, object? additionalContext = null)
     {
-        bool success = Validator.IsValid(value, out string? errorMessage);
+        bool success = Validator.IsValid(value, out string? errorMessage, additionalContext);
 
         success.Should().BeTrue();
         errorMessage.Should().BeNull();
     }
 
-    protected void AssertValidationFailure(TValue value, string expectedMessage, bool errorMessageShouldMatchFormat = false)
+    protected void AssertValidationFailure(TValue value, string expectedMessage, object? additionalContext = null, bool errorMessageShouldMatchFormat = false)
     {
-        bool success = Validator.IsValid(value, out string? errorMessage);
+        bool success = Validator.IsValid(value, out string? errorMessage, additionalContext);
 
         success.Should().BeFalse();
 

@@ -1,8 +1,10 @@
 ﻿using GlyphRasterizer.Configuration;
 using GlyphRasterizer.Prompting.PromptAction;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.Font;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageSize;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.OutputDirectory;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.UnicodeChar;
+using GlyphRasterizer.Terminal;
 using System.Collections.Immutable;
 
 namespace GlyphRasterizer.Prompting;
@@ -13,54 +15,63 @@ public sealed class PromptWizard(SessionContextFactory contextFactory)
     {
         SessionContext currentContext = previousContext ?? contextFactory.CreateDefault();
         ImmutableArray<IPrompt> promptOrder = currentContext.PromptOrder;
-        var totalSteps = promptOrder.Length;
-        var i = 0;
+        int totalSteps = promptOrder.Length;
+        int i = 0;
 
         while (i < totalSteps)
         {
             IPrompt currentPrompt = promptOrder[i];
 
-            if (currentContext.GlyphTypeface is not null && currentPrompt is FontPrompt
-                || currentContext.OutputDirectory is not null && currentPrompt is OutputDirectoryPrompt)
+            if (ShouldSkipPrompt(currentContext, currentPrompt))
             {
                 i++;
                 continue;
             }
 
-            if (currentPrompt is GlyphPrompt glyphsPrompt)
+            if (currentPrompt is UnicodeCharPrompt unicodeCharPrompt)
             {
-                glyphsPrompt.CurrentTypeface = currentContext.GlyphTypeface;
+                unicodeCharPrompt.AdditionalParsingContext = currentContext.Typeface!;
+            }
+
+            if (currentPrompt is ImageSizePrompt imageSizePrompt)
+            {
+                imageSizePrompt.AdditionalValidationContext = currentContext.ImageFormats!;
             }
 
             Console.Write($"[{i + 1}/{totalSteps}] ");
             PromptResult promptResult = currentPrompt.Execute();
+
+            switch (promptResult.CommandType)
+            {
+                case CommandType.Back:
+                    i = Math.Max(0, i - 1);
+                    continue;
+
+                case CommandType.Restart:
+                    currentContext = contextFactory.CreateDefault();
+                    i = 0;
+                    continue;
+
+                case CommandType.Quit:
+                    throw new OperationCanceledException();
+            }
 
             switch (promptResult.PromptActionType)
             {
                 case PromptActionType.Continue:
                     currentPrompt.UpdateContextWithParsedAndValidValue(currentContext);
                     i++;
-                    break;
+                    continue;
 
                 case PromptActionType.Retry:
                     ConsoleHelpers.WriteError(promptResult.ErrorMessage!);
-                    break;
-
-                case PromptActionType.GoBack:
-                    i = Math.Max(0, i - 1);
-                    break;
-
-                case PromptActionType.Restart:
-                    currentContext = 
-                        contextFactory.CreateDefault();
-                    i = 0;
-                    break;
-
-                case PromptActionType.Quit:
-                    throw new OperationCanceledException();
+                    continue;
             }
         }
 
         return currentContext;
     }
+
+    private static bool ShouldSkipPrompt(SessionContext context, IPrompt prompt) => context.ShouldSkipFontAndOutputDirectoryPrompts
+                                                                                    && prompt is FontPrompt or OutputDirectoryPrompt;
 }

@@ -1,4 +1,4 @@
-﻿using GlyphRasterizer.Prompting.Prompts.InputType.String.UnicodeChar;
+﻿using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using Resources.Messages;
 using System.Collections.Immutable;
 using System.Windows.Media;
@@ -6,9 +6,9 @@ using Tests.Common.Prompting.Parsing;
 
 namespace Tests.Unit.Prompting.Parsing;
 
-public sealed class UnicodeCharParserUnitTests : ParserTestBase<UnicodeCharParser, string, ImmutableArray<UnicodeChar>?>
+public sealed class GlyphParserUnitTests : ParserTestBase<GlyphParser, string, ImmutableArray<Glyph>?>
 {
-    protected override UnicodeCharParser Parser { get; } = new();
+    protected override GlyphParser Parser { get; } = new();
 
     [Theory]
     [MemberData(nameof(EmptyStringInput))]

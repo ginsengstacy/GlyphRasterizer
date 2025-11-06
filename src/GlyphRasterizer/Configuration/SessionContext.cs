@@ -1,5 +1,5 @@
 ﻿using GlyphRasterizer.Prompting;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.UnicodeChar;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using ImageMagick;
 using System.Collections.Immutable;
 using System.Windows.Media;
@@ -10,7 +10,7 @@ public sealed class SessionContext
 {
     public SessionContext(
         GlyphTypeface typeface,
-        ImmutableArray<UnicodeChar> unicodeChars,
+        ImmutableArray<Glyph> glyphs,
         string outputDirectory,
         Color color,
         uint imageSize,
@@ -18,7 +18,7 @@ public sealed class SessionContext
     )
     {
         Typeface = typeface;
-        UnicodeChars = unicodeChars;
+        Glyphs = glyphs;
         OutputDirectory = outputDirectory;
         Color = color;
         ImageSize = imageSize;
@@ -36,7 +36,7 @@ public sealed class SessionContext
     public bool ShouldSkipFontAndOutputDirectoryPrompts;
 
     public GlyphTypeface? Typeface { get; set; }
-    public ImmutableArray<UnicodeChar>? UnicodeChars { get; set; }
+    public ImmutableArray<Glyph>? Glyphs { get; set; }
     public Color? Color { get; set; }
     public uint? ImageSize { get; set; }
     public ImmutableArray<MagickFormat>? ImageFormats { get; set; }

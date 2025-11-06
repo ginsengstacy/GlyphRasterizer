@@ -1,5 +1,5 @@
 ﻿using GlyphRasterizer.Configuration;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.UnicodeChar;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using GlyphRasterizer.Terminal;
 using ImageMagick;
 using Resources.Messages;
@@ -9,14 +9,14 @@ namespace GlyphRasterizer.Output;
 
 internal sealed class OutputSaver(OverwriteDecisionService overwriteDecisionService)
 {
-    internal void TrySaveImageAsEachSelectedFormat(UnicodeChar unicodeChar, MagickImage image, SessionContext context)
+    internal void TrySaveImageAsEachSelectedFormat(Glyph glyph, MagickImage image, SessionContext context)
     {
         Directory.CreateDirectory(context.OutputDirectory!);
 
         foreach (MagickFormat imageFormat in context.ImageFormats!)
         {
             string fileExtension = '.' + (Enum.GetName(imageFormat) ?? string.Empty).ToLower();
-            string outputPath = Path.Combine(context.OutputDirectory!, $"Glyph_{unicodeChar.Label}{fileExtension}");
+            string outputPath = Path.Combine(context.OutputDirectory!, $"Glyph_{glyph.Label}{fileExtension}");
 
             if (!overwriteDecisionService.ShouldSave(outputPath, context))
             {

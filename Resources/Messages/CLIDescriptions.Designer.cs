@@ -79,6 +79,15 @@ namespace Resources.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Glyph(s) to render (single: e.g., A; multiple: e.g., ABC)..
+        /// </summary>
+        public static string Glyph {
+            get {
+                return ResourceManager.GetString("Glyph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Output image format(s) to generate (single: e.g., {0}; multiple: e.g., {0},{1}).{2}Available: {3}.
         /// </summary>
         public static string ImageFormat_FormatString {
@@ -102,15 +111,6 @@ namespace Resources.Messages {
         public static string OutputDirectory {
             get {
                 return ResourceManager.GetString("OutputDirectory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unicode char(s) to render (single: e.g., A; multiple: e.g., ABC)..
-        /// </summary>
-        public static string UnicodeChar {
-            get {
-                return ResourceManager.GetString("UnicodeChar", resourceCulture);
             }
         }
     }

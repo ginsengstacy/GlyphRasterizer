@@ -126,8 +126,8 @@
   <data name="Font" xml:space="preserve">
     <value>Enter font path (e.g., C:\Users\Alice\Fonts\Arial.ttf):</value>
   </data>
-  <data name="UnicodeChar_FormatString" xml:space="preserve">
-    <value>Enter unicode char(s) (single: e.g., A; multiple: e.g., ABC).{0}Unicode char(s):</value>
+  <data name="Glyph_FormatString" xml:space="preserve">
+    <value>Enter glyph(s) (single: e.g., A; multiple: e.g., ABC).{0}Glyph(s):</value>
     <comment>0 = \n</comment>
   </data>
   <data name="ImageFormat_FormatString" xml:space="preserve">

@@ -1,15 +1,15 @@
 ﻿using Resources.Messages;
 using System.Text;
 
-namespace GlyphRasterizer.Prompting.Prompts.InputType.String.UnicodeChar;
+namespace GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 
-public readonly record struct UnicodeChar
+public readonly record struct Glyph
 {
     public string Value { get; init; }
     public string Label { get; init; }
     public int CodePoint { get; init; }
 
-    public UnicodeChar(string input)
+    public Glyph(string input)
     {
         if (string.IsNullOrWhiteSpace(input))
         {

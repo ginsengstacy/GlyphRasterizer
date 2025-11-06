@@ -4,11 +4,11 @@ using System.Globalization;
 using System.Text;
 using System.Windows.Media;
 
-namespace GlyphRasterizer.Prompting.Prompts.InputType.String.UnicodeChar;
+namespace GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 
-public sealed class UnicodeCharParser : IPromptInputParser<string, ImmutableArray<UnicodeChar>?>
+public sealed class GlyphParser : IPromptInputParser<string, ImmutableArray<Glyph>?>
 {
-    public bool TryParse(string input, out ImmutableArray<UnicodeChar>? value, out string? errorMessage, object? additionalContext = null)
+    public bool TryParse(string input, out ImmutableArray<Glyph>? value, out string? errorMessage, object? additionalContext = null)
     {
         if (string.IsNullOrWhiteSpace(input))
         {
@@ -31,15 +31,15 @@ public sealed class UnicodeCharParser : IPromptInputParser<string, ImmutableArra
         }
 
         GlyphTypeface typeface = (GlyphTypeface)additionalContext!;
-        var parsedGlyphs = new List<UnicodeChar>();
+        var parsedGlyphs = new List<Glyph>();
         var uncontainedGlyphNames = new List<string>();
 
         foreach (string token in tokens)
         {
-            var unicodeChar = new UnicodeChar(token);
-            if (typeface.CharacterToGlyphMap.TryGetValue(unicodeChar.CodePoint, out _))
+            var glyph = new Glyph(token);
+            if (typeface.CharacterToGlyphMap.TryGetValue(glyph.CodePoint, out _))
             {
-                parsedGlyphs.Add(unicodeChar);
+                parsedGlyphs.Add(glyph);
             }
             else
             {

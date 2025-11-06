@@ -127,8 +127,8 @@
     <value>Output image format(s) to generate (single: e.g., {0}; multiple: e.g., {0},{1}).{2}Available: {3}</value>
     <comment>2 = \n</comment>
   </data>
-  <data name="UnicodeChar" xml:space="preserve">
-    <value>Unicode char(s) to render (single: e.g., A; multiple: e.g., ABC).</value>
+  <data name="Glyph" xml:space="preserve">
+    <value>Glyph(s) to render (single: e.g., A; multiple: e.g., ABC).</value>
   </data>
   <data name="OutputDirectory" xml:space="preserve">
     <value>Target directory for output images.</value>

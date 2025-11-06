@@ -1,5 +1,5 @@
 ﻿using GlyphRasterizer.Configuration;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.UnicodeChar;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using ImageMagick;
 using Resources.Messages;
 using System.IO;
@@ -11,9 +11,9 @@ namespace GlyphRasterizer.Rendering;
 
 public static class RenderingHelpers
 {
-    public static MagickImage RenderGlyph(UnicodeChar unicodeChar, GlyphTypeface typeface, Color color, uint imageSize)
+    public static MagickImage RenderGlyph(Glyph glyph, GlyphTypeface typeface, Color color, uint imageSize)
     {
-        Geometry outline = GetGlyphOutline(unicodeChar, typeface, imageSize);
+        Geometry outline = GetGlyphOutline(glyph, typeface, imageSize);
         TransformGroup transform = CreateCenteredTransform(outline, imageSize);
         DrawingVisual visual = DrawGlyphVisual(outline, transform, color);
         RenderTargetBitmap bitmap = RenderToBitmap(visual, (int)imageSize);
@@ -59,9 +59,9 @@ public static class RenderingHelpers
         return visual;
     }
 
-    private static Geometry GetGlyphOutline(UnicodeChar unicodeChar, GlyphTypeface font, uint imageSize)
+    private static Geometry GetGlyphOutline(Glyph glyph, GlyphTypeface font, uint imageSize)
     {
-        return font.CharacterToGlyphMap.TryGetValue(unicodeChar.CodePoint, out ushort glyphIndex)
+        return font.CharacterToGlyphMap.TryGetValue(glyph.CodePoint, out ushort glyphIndex)
             ? font.GetGlyphOutline(glyphIndex, imageSize, hintingEmSize: 1)
             : throw new InvalidOperationException(ExceptionMessages.GlyphNotFound);
     }

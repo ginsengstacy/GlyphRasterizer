@@ -6,11 +6,7 @@ using Resources.Messages;
 
 namespace GlyphRasterizer.Terminal;
 
-internal sealed class InteractiveLoop(
-    PromptWizard promptWizard,
-    RestartPrompt restartPrompt,
-    UnicodeCharProcessingOrchestrator unicodeCharProcessingOrchestrator
-)
+internal sealed class InteractiveLoop(PromptWizard promptWizard, RestartPrompt restartPrompt, GlyphProcessingOrchestrator glyphProcessingOrchestrator)
 {
     internal void Run()
     {
@@ -23,7 +19,7 @@ internal sealed class InteractiveLoop(
             try
             {
                 SessionContext currentContext = promptWizard.GetSessionContext(previousContext);
-                unicodeCharProcessingOrchestrator.RenderAndSaveAllFromContext(currentContext);
+                glyphProcessingOrchestrator.RenderAndSaveAllFromContext(currentContext);
                 Console.WriteLine(InfoMessages.OperationComplete);
                 HandleRestart(ref previousContext, currentContext);
             }

@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.UnicodeChar;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using Resources;
 using Resources.Messages;
 using System.Collections.Immutable;
@@ -9,9 +9,9 @@ using Tests.Common.Prompting.Parsing;
 
 namespace Tests.Integration.Prompting.Parsing;
 
-public sealed class UnicodeParserIntegrationTests : ParserTestBase<UnicodeCharParser, string, ImmutableArray<UnicodeChar>?>
+public sealed class GlyphParserIntegrationTests : ParserTestBase<GlyphParser, string, ImmutableArray<Glyph>?>
 {
-    protected override UnicodeCharParser Parser { get; } = new();
+    protected override GlyphParser Parser { get; } = new();
 
     private const string UncontainedGlyph1 = "𐀀";
     private const string UncontainedGlyph2 = "𐀁";
@@ -67,21 +67,21 @@ public sealed class UnicodeParserIntegrationTests : ParserTestBase<UnicodeCharPa
     [InlineData("Я")]
     [InlineData("字")]
     public void TryParse_Should_ReturnTrue_When_InputIsSingleBMPChar(string input) =>
-        AssertParseSuccess(input, [new UnicodeChar(input)], _unifont);
+        AssertParseSuccess(input, [new Glyph(input)], _unifont);
 
     [Theory]
     [InlineData("🄯")]
     [InlineData("𠀋")]
     [InlineData("𲍿")]
     public void TryParse_Should_ReturnTrue_When_InputIsSingleSMPChar(string input) =>
-        AssertParseSuccess(input, [new UnicodeChar(input)], _unifont);
+        AssertParseSuccess(input, [new Glyph(input)], _unifont);
 
     [Theory]
     [InlineData("é")]
     [InlineData("ö")]
     [InlineData("ñ")]
     public void TryParse_Should_ReturnTrue_When_InputIsComposedChar(string input) =>
-        AssertParseSuccess(input, [new UnicodeChar(input)], _unifont);
+        AssertParseSuccess(input, [new Glyph(input)], _unifont);
 
     [Theory]
     [InlineData("ABC")]
@@ -89,13 +89,13 @@ public sealed class UnicodeParserIntegrationTests : ParserTestBase<UnicodeCharPa
     [InlineData("あいう")]
     [InlineData("妈汉龙")]
     public void TryParse_Should_ReturnTrue_When_InputHasMultipleDistinctGlyphs(string input) =>
-        AssertParseSuccess(input, [.. input.Where(c => !char.IsWhiteSpace(c)).Select(c => new UnicodeChar(c.ToString()))], _unifont);
+        AssertParseSuccess(input, [.. input.Where(c => !char.IsWhiteSpace(c)).Select(c => new Glyph(c.ToString()))], _unifont);
 
     [Theory]
     [InlineData(" A")]
     [InlineData("A ")]
     public void TryParse_Should_ReturnTrue_When_InputHasExtraWhitespace(string input) =>
-        AssertParseSuccess(input, [new UnicodeChar(input.Trim())], _unifont);
+        AssertParseSuccess(input, [new Glyph(input.Trim())], _unifont);
 
     [Theory]
     [InlineData("AAA")]
@@ -107,7 +107,7 @@ public sealed class UnicodeParserIntegrationTests : ParserTestBase<UnicodeCharPa
     public void TryParse_Should_ReturnTrue_When_InputHasDuplicateGlyphs(string input)
     {
         Rune[] distinctRunes = [.. input.EnumerateRunes().Where(r => !Rune.IsWhiteSpace(r)).Distinct()];
-        ImmutableArray<UnicodeChar> expectedGlyphs = [.. distinctRunes.Select(r => new UnicodeChar(r.ToString()))];
+        ImmutableArray<Glyph> expectedGlyphs = [.. distinctRunes.Select(r => new Glyph(r.ToString()))];
         AssertParseSuccess(input, expectedGlyphs, _unifont);
     }
 
@@ -116,11 +116,11 @@ public sealed class UnicodeParserIntegrationTests : ParserTestBase<UnicodeCharPa
     {
         const string composed = "é";
         const string decomposed = "e\u0301";
-        AssertParseSuccess(composed + decomposed, [new UnicodeChar(composed)], _unifont);
+        AssertParseSuccess(composed + decomposed, [new Glyph(composed)], _unifont);
     }
 
     [Theory]
     [InlineData("A")]
     public void TryParse_Should_ReturnTrue_When_InputConsistsOfThousandsOfGlyphs(string input) =>
-        AssertParseSuccess(new string(input[0], 10_000), [new UnicodeChar(input)], _unifont);
+        AssertParseSuccess(new string(input[0], 10_000), [new Glyph(input)], _unifont);
 }

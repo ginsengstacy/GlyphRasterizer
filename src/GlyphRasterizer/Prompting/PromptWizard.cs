@@ -3,7 +3,7 @@ using GlyphRasterizer.Prompting.PromptAction;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.Font;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageSize;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.OutputDirectory;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.UnicodeChar;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using GlyphRasterizer.Terminal;
 using System.Collections.Immutable;
 
@@ -28,9 +28,9 @@ public sealed class PromptWizard(SessionContextFactory contextFactory)
                 continue;
             }
 
-            if (currentPrompt is UnicodeCharPrompt unicodeCharPrompt)
+            if (currentPrompt is GlyphPrompt glyphPrompt)
             {
-                unicodeCharPrompt.AdditionalParsingContext = currentContext.Typeface!;
+                glyphPrompt.AdditionalParsingContext = currentContext.Typeface!;
             }
 
             if (currentPrompt is ImageSizePrompt imageSizePrompt)

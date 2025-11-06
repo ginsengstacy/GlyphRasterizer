@@ -1,26 +1,26 @@
 ﻿using GlyphRasterizer.Configuration;
 using GlyphRasterizer.Output;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.UnicodeChar;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using GlyphRasterizer.Rendering;
 using ImageMagick;
 
 namespace GlyphRasterizer;
 
-internal class UnicodeCharProcessingOrchestrator(OutputSaver outputSaver)
+internal class GlyphProcessingOrchestrator(OutputSaver outputSaver)
 {
     private readonly OutputSaver _outputSaver = outputSaver;
 
     internal void RenderAndSaveAllFromContext(SessionContext context)
     {
-        foreach (UnicodeChar unicodeChar in context.UnicodeChars!)
+        foreach (Glyph glyph in context.Glyphs!)
         {
             MagickImage image = RenderingHelpers.RenderGlyph(
-                unicodeChar, context.Typeface!,
+                glyph, context.Typeface!,
                 context.Color!.Value,
                 context.ImageSize!.Value
             );
 
-            _outputSaver.TrySaveImageAsEachSelectedFormat(unicodeChar, image, context);
+            _outputSaver.TrySaveImageAsEachSelectedFormat(glyph, image, context);
             image.Dispose();
         }
     }

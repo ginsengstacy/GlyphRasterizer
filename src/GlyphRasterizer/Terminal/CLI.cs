@@ -5,7 +5,7 @@ using GlyphRasterizer.Prompting.Prompts.InputType.String.GlyphColor;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormat;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageSize;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.OutputDirectory;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.UnicodeChar;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using ImageMagick;
 using Resources.Messages;
 using System.Collections.Immutable;
@@ -17,12 +17,12 @@ namespace GlyphRasterizer.Terminal;
 
 internal sealed class CLI(
     ColorParser colorParser,
-    UnicodeCharParser unicodeCharParser,
+    GlyphParser glyphParser,
     TypefaceParser typefaceParser,
     ImageFormatParser imageFormatParser,
     OutputDirectoryParser outputDirectoryParser,
     ImageSizeValidator imageSizeValidator,
-    UnicodeCharProcessingOrchestrator unicodeCharProcessingOrchestrator
+    GlyphProcessingOrchestrator glyphProcessingOrchestrator
 )
 {
     private static readonly string[] _imageFormatNames = [.. AppConfig.AvailableImageFormats.Select(f => Enum.GetName(f)!)];
@@ -38,9 +38,9 @@ internal sealed class CLI(
             CustomParser = result => Parse(result, typefaceParser)
         };
 
-        var unicodeCharArg = new Argument<string?>("unicodeChar")
+        var glyphArg = new Argument<string?>("glyph")
         {
-            Description = CLIDescriptions.UnicodeChar
+            Description = CLIDescriptions.Glyph
         };
 
         var outputDirectoryArg = new Argument<string?>("output")
@@ -78,7 +78,7 @@ internal sealed class CLI(
         };
 
         root.Add(fontArg);
-        root.Add(unicodeCharArg);
+        root.Add(glyphArg);
         root.Add(outputDirectoryArg);
         root.Add(colorOpt);
         root.Add(imageSizeOpt);
@@ -87,13 +87,13 @@ internal sealed class CLI(
         root.SetAction(parseResult =>
         {
             GlyphTypeface typeface = parseResult.GetValue(fontArg)!;
-            string rawUnicodeChars = parseResult.GetValue(unicodeCharArg)!;
+            string rawGlyphs = parseResult.GetValue(glyphArg)!;
             string outputDirectory = parseResult.GetValue(outputDirectoryArg)!;
             Color? color = parseResult.GetValue(colorOpt);
             uint? imageSize = parseResult.GetValue(imageSizeOpt);
             ImmutableArray<MagickFormat>? imageFormats = parseResult.GetValue(formatOpt);
 
-            if (!unicodeCharParser.TryParse(rawUnicodeChars, out ImmutableArray<UnicodeChar>? unicodeChars, out string? errorMessage, typeface))
+            if (!glyphParser.TryParse(rawGlyphs, out ImmutableArray<Glyph>? glyphs, out string? errorMessage, typeface))
             {
                 ConsoleHelpers.WriteError(errorMessage!);
                 return;
@@ -105,8 +105,8 @@ internal sealed class CLI(
                 return;
             }
 
-            var context = new SessionContext(typeface, unicodeChars!.Value, outputDirectory, color!.Value, imageSize!.Value, imageFormats!.Value);
-            unicodeCharProcessingOrchestrator.RenderAndSaveAllFromContext(context);
+            var context = new SessionContext(typeface, glyphs!.Value, outputDirectory, color!.Value, imageSize!.Value, imageFormats!.Value);
+            glyphProcessingOrchestrator.RenderAndSaveAllFromContext(context);
         });
 
         root.Parse(args).Invoke();

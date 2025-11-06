@@ -21,7 +21,7 @@ public abstract class PromptBase<TInput, TValue>(CommandTypeParser commandTypePa
 
     public PromptResult Execute()
     {
-        Console.Write(Message, RuntimeMessageParameters + " ");
+        Console.Write($"{string.Format(Message, RuntimeMessageParameters)} ");
         TInput input = GetInput();
 
         if (input is string stringInput && _commandTypeParser.TryParse(stringInput, out CommandType? commandType, out _))

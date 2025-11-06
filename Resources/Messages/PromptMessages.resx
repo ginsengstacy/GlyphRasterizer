@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Color" xml:space="preserve">
-    <value>Enter color as name (e.g., Red) or hexadecimal code (e.g., #FFFF0000):</value>
+    <value>Enter color as name (e.g., Red) or hexadecimal code (e.g., #FF0000):</value>
   </data>
   <data name="FileAlreadyExists_FormatString" xml:space="preserve">
     <value>{0} already exists. Overwrite? (Y/N, Ctrl+Y = yes to all, Ctrl+N = no to all)</value>

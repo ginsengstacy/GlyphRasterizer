@@ -131,7 +131,7 @@
     <comment>0 = \n</comment>
   </data>
   <data name="ImageFormat_FormatString" xml:space="preserve">
-    <value>Enter image format(s) (single: e.g., {0}; multiple: e.g., {0},{1}).{2}Available: {3}{4}Format(s):</value>
+    <value>Enter image format(s) (single: e.g., {0}; multiple: e.g., {0}, {1}).{2}Available: {3}{4}Format(s):</value>
     <comment>2,4 = \n</comment>
   </data>
   <data name="OutputDirectory" xml:space="preserve">

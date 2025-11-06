@@ -97,7 +97,7 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter image format(s) (single: e.g., {0}; multiple: e.g., {0},{1}).{2}Available: {3}{4}Format(s):.
+        ///   Looks up a localized string similar to Enter image format(s) (single: e.g., {0}; multiple: e.g., {0}, {1}).{2}Available: {3}{4}Format(s):.
         /// </summary>
         public static string ImageFormat_FormatString {
             get {

@@ -1,26 +1,31 @@
 ## General Information
 
-**Font**  
+### Font
 - Accepts `.ttf` or `.otf` font files.
 
-**Glyphs**  
+### Glyphs  
 - One or more characters to render.  
   - **Single character**: `"A"`  
   - **Multiple characters**: `"ABC123"`
 
 > **Note:** Each character in a multi-character string is rendered as a separate image file. Any Unicode character can be used as a glyph and is saved as **Glyph_{UnicodeLabel}** (e.g., **Glyph_U+0041** for `A`). 
 
-**Color**  
+### Color
 - Can be specified using a named color (e.g., `Red`) or a hexadecimal code (e.g., `#FF0000`).
 
-**Image Size**  
+### Image Size
 - Square image size in pixels between `16` and `2048`.
 
-**Formats**  
+### Formats 
 - Output image format(s).  
   - **Single format**: `png`  
   - **Multiple formats**: `png,jpeg,bmp`  
   - **Supported formats**: `png`, `jpeg`, `webp`, `tiff`, `ico`, `avif`, `bmp`, `psd`, `pcx`, `tga`, `pnm`
+    
+### Background
+- Background is transparent by default.
+- When an output format does not support alpha, the image is automatically flattened to a white background.
+- Formats without transparency include: `jpeg`, `avif`, `pcx`, `pnm`
 
 ---
 

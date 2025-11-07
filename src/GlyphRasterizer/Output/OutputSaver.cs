@@ -52,7 +52,10 @@ internal sealed class OutputSaver(OverwriteDecisionService overwriteDecisionServ
     private static bool MagickFormatSupportsAlpha(MagickFormat format) => format is MagickFormat.Png
                                                                                  or MagickFormat.WebP
                                                                                  or MagickFormat.Tiff
-                                                                                 or MagickFormat.Psd;
+                                                                                 or MagickFormat.Ico
+                                                                                 or MagickFormat.Bmp
+                                                                                 or MagickFormat.Psd
+                                                                                 or MagickFormat.Tga;
 
     private static MagickImage FlattenImageForOpaqueFormat(IMagickImage<byte> image, MagickColor backgroundColor)
     {

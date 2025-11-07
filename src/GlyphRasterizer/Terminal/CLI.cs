@@ -1,11 +1,11 @@
 ﻿using GlyphRasterizer.Configuration;
 using GlyphRasterizer.Prompting;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.Font;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.GlyphColor;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormat;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageSize;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.OutputDirectory;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using ImageMagick;
 using Resources.Messages;
 using System.Collections.Immutable;

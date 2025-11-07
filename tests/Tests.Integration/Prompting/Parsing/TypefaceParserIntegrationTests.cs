@@ -18,7 +18,7 @@ public sealed class TypefaceParserIntegrationTests : ParserTestBase<TypefacePars
     {
         { _unifontPath },
         { $"\"{_unifontPath}\"" },
-        { $"{_unifontPath}\\" }    
+        { $"{_unifontPath}\\" }
     };
 
     [Theory]

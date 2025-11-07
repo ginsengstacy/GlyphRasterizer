@@ -13,16 +13,16 @@ public sealed class ColorParserUnitTests : ParserTestBase<ColorParser, string, C
     {
         { "Blue", Colors.Blue },
         { "Red", Colors.Red },
-        { "red", Colors.Red },      
-        { " Red ", Colors.Red } 
+        { "red", Colors.Red },
+        { " Red ", Colors.Red }
     };
 
     public static readonly TheoryData<string, Color?> HexColors = new()
     {
         { "#FF0000", Colors.Red },                               // RGB
         { "#FFFF0000", Colors.Red },                             // ARGB
-        { "#ff0000", Colors.Red },                   
-        { " #FF0000 ", Colors.Red },                    
+        { "#ff0000", Colors.Red },
+        { " #FF0000 ", Colors.Red },
         { "#80FF0000", Color.FromArgb(0x80, 0xFF, 0x00, 0x00) }, // alpha 50%      
     };
 

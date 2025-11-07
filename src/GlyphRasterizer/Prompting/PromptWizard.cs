@@ -1,9 +1,9 @@
 ﻿using GlyphRasterizer.Configuration;
 using GlyphRasterizer.Prompting.PromptAction;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.Font;
+using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageSize;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.OutputDirectory;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using GlyphRasterizer.Terminal;
 using System.Collections.Immutable;
 

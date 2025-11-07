@@ -13,8 +13,8 @@ public sealed class OutputDirectoryPromptIntegrationTests : ParserTestBase<Outpu
     public static readonly TheoryData<string> ValidOutputDirectory = new()
     {
         { _outputDirectory },
-        { $"\"{_outputDirectory}\"" }, 
-        { $"{_outputDirectory}\\" }   
+        { $"\"{_outputDirectory}\"" },
+        { $"{_outputDirectory}\\" }
     };
 
     [Theory]

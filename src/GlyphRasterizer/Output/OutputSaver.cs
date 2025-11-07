@@ -3,20 +3,31 @@ using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using GlyphRasterizer.Terminal;
 using ImageMagick;
 using Resources.Messages;
+using System.Collections.Immutable;
 using System.IO;
 
 namespace GlyphRasterizer.Output;
 
 internal sealed class OutputSaver(OverwriteDecisionService overwriteDecisionService)
 {
-    internal void TrySaveImageAsEachSelectedFormat(Glyph glyph, MagickImage image, SessionContext context)
+    private static readonly ImmutableHashSet<MagickFormat> _formatsSupportingAlpha =
+        ImmutableHashSet.Create(
+            MagickFormat.Png,
+            MagickFormat.WebP,
+            MagickFormat.Tiff,
+            MagickFormat.Ico,
+            MagickFormat.Bmp,
+            MagickFormat.Psd,
+            MagickFormat.Tga
+        );
+
+    internal void SaveImageAsEachSelectedFormat(Glyph glyph, MagickImage image, SessionContext context)
     {
         Directory.CreateDirectory(context.OutputDirectory!);
 
         foreach (MagickFormat imageFormat in context.ImageFormats!)
         {
-            string fileExtension = '.' + (Enum.GetName(imageFormat) ?? string.Empty).ToLower();
-            string outputPath = Path.Combine(context.OutputDirectory!, $"Glyph_{glyph.Label}{fileExtension}");
+            string outputPath = BuildOutputPath(glyph, imageFormat, context.OutputDirectory!);
 
             if (!overwriteDecisionService.ShouldSave(outputPath, context))
             {
@@ -49,13 +60,13 @@ internal sealed class OutputSaver(OverwriteDecisionService overwriteDecisionServ
         }
     }
 
-    private static bool MagickFormatSupportsAlpha(MagickFormat format) => format is MagickFormat.Png
-                                                                                 or MagickFormat.WebP
-                                                                                 or MagickFormat.Tiff
-                                                                                 or MagickFormat.Ico
-                                                                                 or MagickFormat.Bmp
-                                                                                 or MagickFormat.Psd
-                                                                                 or MagickFormat.Tga;
+    private static string BuildOutputPath(Glyph glyph, MagickFormat format, string directory)
+    {
+        string formatExtensionName = Enum.GetName(format) ?? throw new ArgumentNullException(nameof(format));
+        return Path.Combine(directory, $"Glyph_{glyph.Label}.{formatExtensionName.ToLower()}");
+    }
+
+    private static bool MagickFormatSupportsAlpha(MagickFormat format) => _formatsSupportingAlpha.Contains(format);
 
     private static MagickImage FlattenImageForOpaqueFormat(IMagickImage<byte> image, MagickColor backgroundColor)
     {

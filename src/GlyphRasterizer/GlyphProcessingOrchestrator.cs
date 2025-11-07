@@ -20,7 +20,7 @@ internal class GlyphProcessingOrchestrator(OutputSaver outputSaver)
                 context.ImageSize!.Value
             );
 
-            _outputSaver.TrySaveImageAsEachSelectedFormat(glyph, image, context);
+            _outputSaver.SaveImageAsEachSelectedFormat(glyph, image, context);
             image.Dispose();
         }
     }

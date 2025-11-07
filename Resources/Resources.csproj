@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <Content Include="Fonts\Unifont.otf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 

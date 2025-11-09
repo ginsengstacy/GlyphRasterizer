@@ -102,4 +102,4 @@ During an interactive session, you can enter the following commands at any promp
 
 ### Example Session
 
-<img width="1641" height="956" alt="Screenshot 2025-11-09 024754" src="https://github.com/user-attachments/assets/29fdc11d-bb44-48b3-9e49-2a45162afea6" />
+<img width="1712" height="947" alt="Screenshot 2025-11-09 032109" src="https://github.com/user-attachments/assets/d40f711d-f053-40b5-97ca-e060b1367da4" />

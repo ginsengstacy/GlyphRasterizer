@@ -127,7 +127,7 @@
     <value>Enter font path (e.g., C:\Users\Alice\Fonts\Arial.ttf):</value>
   </data>
   <data name="Glyph" xml:space="preserve">
-    <value>Enter glyph(s) (single: e.g., A; multiple: e.g., ABC). Glyph(s):</value>
+    <value>Enter glyph(s) (single: e.g., A; multiple: e.g., ABC):</value>
   </data>
   <data name="Format_FormatString" xml:space="preserve">
     <value>Enter image format(s) (single: e.g., {0}; multiple: e.g., {0}, {1}).{2}Available: {3}{4}Format(s):</value>

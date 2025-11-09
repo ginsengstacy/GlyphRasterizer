@@ -88,7 +88,7 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter glyph(s) (single: e.g., A; multiple: e.g., ABC). Glyph(s):.
+        ///   Looks up a localized string similar to Enter glyph(s) (single: e.g., A; multiple: e.g., ABC):.
         /// </summary>
         public static string Glyph {
             get {

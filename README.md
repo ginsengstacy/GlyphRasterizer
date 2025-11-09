@@ -70,11 +70,11 @@ GlyphRasterizer.exe C:\Users\Alice\Fonts\Arial.ttf ABC123 C:\Users\Alice\Output
 
 ## Interactive Console Tool
 
-The interactive console mode guides you through configuration and rendering without passing command-line arguments.
+Guides you through configuration and rendering without passing command-line arguments.
 
 ### Overview
 
-When you run the application without arguments:
+When you run the app without arguments:
 
 ```
 GlyphRasterizer.exe

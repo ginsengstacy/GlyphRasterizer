@@ -122,14 +122,5 @@ namespace Resources.Messages {
                 return ResourceManager.GetString("Restart", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter image size ({0}-{1}px):.
-        /// </summary>
-        public static string Size_FormatString {
-            get {
-                return ResourceManager.GetString("Size_FormatString", resourceCulture);
-            }
-        }
     }
 }

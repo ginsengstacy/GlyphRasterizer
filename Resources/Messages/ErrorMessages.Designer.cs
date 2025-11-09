@@ -97,33 +97,6 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Size must be ≤ {0}..
-        /// </summary>
-        public static string SizeTooLarge_FormatString {
-            get {
-                return ResourceManager.GetString("SizeTooLarge_FormatString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Size too large for ICO format. Maximum allowed size is {0}px..
-        /// </summary>
-        public static string SizeTooLargeForIco_FormatString {
-            get {
-                return ResourceManager.GetString("SizeTooLargeForIco_FormatString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Size must be ≥ {0}..
-        /// </summary>
-        public static string SizeTooSmall_FormatString {
-            get {
-                return ResourceManager.GetString("SizeTooSmall_FormatString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Font &apos;{0}&apos; does not contain the glyph(s): {1}..
         /// </summary>
         public static string UncontainedGlyphs_FormatString {

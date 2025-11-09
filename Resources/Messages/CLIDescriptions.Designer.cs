@@ -97,15 +97,6 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Square image size ({0}-{1}px)..
-        /// </summary>
-        public static string ImageSize_FormatString {
-            get {
-                return ResourceManager.GetString("ImageSize_FormatString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Target directory for output images..
         /// </summary>
         public static string OutputDirectory {

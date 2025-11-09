@@ -2,7 +2,6 @@
 using GlyphRasterizer.Prompting.PromptAction;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.Font;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageSize;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.OutputDirectory;
 using GlyphRasterizer.Terminal;
 using System.Collections.Immutable;
@@ -31,11 +30,6 @@ public sealed class PromptWizard(SessionContextFactory contextFactory)
             if (currentPrompt is GlyphPrompt glyphPrompt)
             {
                 glyphPrompt.AdditionalParsingContext = currentContext.Typeface!;
-            }
-
-            if (currentPrompt is ImageSizePrompt imageSizePrompt)
-            {
-                imageSizePrompt.AdditionalValidationContext = currentContext.ImageFormats!;
             }
 
             Console.Write($"[{i + 1}/{totalSteps}] ");

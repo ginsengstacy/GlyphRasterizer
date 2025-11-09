@@ -133,7 +133,4 @@
   <data name="OutputDirectory" xml:space="preserve">
     <value>Target directory for output images.</value>
   </data>
-  <data name="ImageSize_FormatString" xml:space="preserve">
-    <value>Square image size ({0}-{1}px).</value>
-  </data>
 </root>

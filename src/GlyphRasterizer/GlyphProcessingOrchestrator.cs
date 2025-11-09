@@ -14,14 +14,12 @@ internal class GlyphProcessingOrchestrator(OutputSaver outputSaver)
     {
         foreach (Glyph glyph in context.Glyphs!)
         {
-            MagickImage image = RenderingHelpers.RenderGlyph(
+            using MagickImage image = RenderingHelpers.RenderGlyph(
                 glyph, context.Typeface!,
-                context.Color!.Value,
-                context.ImageSize!.Value
+                context.Color!.Value
             );
 
             _outputSaver.SaveImageAsEachSelectedFormat(glyph, image, context);
-            image.Dispose();
         }
     }
 }

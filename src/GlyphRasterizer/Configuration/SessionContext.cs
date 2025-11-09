@@ -13,7 +13,6 @@ public sealed class SessionContext
         ImmutableArray<Glyph> glyphs,
         string outputDirectory,
         Color color,
-        uint imageSize,
         ImmutableArray<MagickFormat> imageFormats
     )
     {
@@ -21,7 +20,6 @@ public sealed class SessionContext
         Glyphs = glyphs;
         OutputDirectory = outputDirectory;
         Color = color;
-        ImageSize = imageSize;
         ImageFormats = imageFormats;
     }
 
@@ -38,7 +36,6 @@ public sealed class SessionContext
     public GlyphTypeface? Typeface { get; set; }
     public ImmutableArray<Glyph>? Glyphs { get; set; }
     public Color? Color { get; set; }
-    public uint? ImageSize { get; set; }
     public ImmutableArray<MagickFormat>? ImageFormats { get; set; }
     public string? OutputDirectory { get; set; }
 }

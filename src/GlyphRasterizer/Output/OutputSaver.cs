@@ -39,7 +39,23 @@ internal sealed class OutputSaver(OverwriteDecisionService overwriteDecisionServ
             {
                 using IMagickImage<byte> imageToWrite = image.Clone();
 
-                if (MagickFormatSupportsAlpha(imageFormat))
+                // ICO requires multiple embedded sizes; resize each and add to collection for proper scaling
+                if (imageFormat == MagickFormat.Ico)
+                {
+                    using var icoCollection = new MagickImageCollection();
+                    uint[] icoSizes = [16, 32, 48, 64, 128, 256];
+
+                    foreach (uint icoSize in icoSizes)
+                    {
+                        var imageToResize = imageToWrite.Clone();
+                        imageToResize.Resize(icoSize, icoSize);
+                        imageToResize.Format = MagickFormat.Png; // ICO uses PNG internally
+                        icoCollection.Add(imageToResize);
+                    }
+
+                    icoCollection.Write(outputPath, MagickFormat.Ico);
+                }
+                else if (MagickFormatSupportsAlpha(imageFormat))
                 {
                     imageToWrite.Format = imageFormat;
                     imageToWrite.Write(outputPath);

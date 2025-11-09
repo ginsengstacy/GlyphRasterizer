@@ -120,17 +120,8 @@
   <data name="EmptyInput" xml:space="preserve">
     <value>Input cannot be empty.</value>
   </data>
-  <data name="PathNotFound" xml:space="preserve">
-    <value>Specified path does not exist.</value>
-  </data>
   <data name="InvalidFormat" xml:space="preserve">
     <value>Invalid Format.</value>
-  </data>
-  <data name="SizeTooSmall_FormatString" xml:space="preserve">
-    <value>Size must be ≥ {0}.</value>
-  </data>
-  <data name="SizeTooLarge_FormatString" xml:space="preserve">
-    <value>Size must be ≤ {0}.</value>
   </data>
   <data name="UncontainedGlyphs_FormatString" xml:space="preserve">
     <value>Font '{0}' does not contain the glyph(s): {1}.</value>
@@ -138,7 +129,7 @@
   <data name="InvalidFormats_FormatString" xml:space="preserve">
     <value>Invalid format(s): {0}.</value>
   </data>
-  <data name="SizeTooLargeForIco_FormatString" xml:space="preserve">
-    <value>Size too large for ICO format. Maximum allowed size is {0}px.</value>
+  <data name="PathNotFound" xml:space="preserve">
+    <value>Specified path does not exist.</value>
   </data>
 </root>

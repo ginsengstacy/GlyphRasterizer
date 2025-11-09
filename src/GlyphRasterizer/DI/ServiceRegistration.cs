@@ -8,7 +8,6 @@ using GlyphRasterizer.Prompting.Prompts.InputType.String.Font;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.GlyphColor;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormat;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageSize;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.OutputDirectory;
 using GlyphRasterizer.Terminal;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,8 +33,7 @@ internal static class ServiceRegistration
     private static IServiceCollection AddPromptingSubsystem(this IServiceCollection services) =>
         services
             .AddPrompts()
-            .AddParsers()
-            .AddValidators();
+            .AddParsers();
 
     private static IServiceCollection AddPrompts(this IServiceCollection services) =>
         services
@@ -43,7 +41,6 @@ internal static class ServiceRegistration
             .AddSingleton<FileOverwritePrompt>()
             .AddSingleton<FontPrompt>()
             .AddSingleton<ImageFormatPrompt>()
-            .AddSingleton<ImageSizePrompt>()
             .AddSingleton<OutputDirectoryPrompt>()
             .AddSingleton<RestartPrompt>()
             .AddSingleton<GlyphPrompt>();
@@ -57,11 +54,7 @@ internal static class ServiceRegistration
             .AddSingleton<OutputDirectoryParser>()
             .AddSingleton<RestartParser>()
             .AddSingleton<TypefaceParser>()
-            .AddSingleton<UIntParser>()
             .AddSingleton<GlyphParser>();
-
-    private static IServiceCollection AddValidators(this IServiceCollection services) =>
-        services.AddSingleton<ImageSizeValidator>();
 
     private static IServiceCollection AddOutputSubsystem(this IServiceCollection services) =>
         services

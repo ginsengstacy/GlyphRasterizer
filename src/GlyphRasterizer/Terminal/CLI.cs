@@ -4,7 +4,6 @@ using GlyphRasterizer.Prompting.Prompts.InputType.String.Font;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.GlyphColor;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormat;
-using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageSize;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.OutputDirectory;
 using ImageMagick;
 using Resources.Messages;
@@ -21,7 +20,6 @@ internal sealed class CLI(
     TypefaceParser typefaceParser,
     ImageFormatParser imageFormatParser,
     OutputDirectoryParser outputDirectoryParser,
-    ImageSizeValidator imageSizeValidator,
     GlyphProcessingOrchestrator glyphProcessingOrchestrator
 )
 {
@@ -50,12 +48,6 @@ internal sealed class CLI(
         };
 
         // Options
-        var imageSizeOpt = new Option<uint?>("--size")
-        {
-            Description = string.Format(CLIDescriptions.ImageSize_FormatString, AppConfig.MinImageSize, AppConfig.MaxImageSize),
-            DefaultValueFactory = _ => Defaults.ImageSize,
-        };
-
         var colorOpt = new Option<Color?>("--color")
         {
             Description = CLIDescriptions.Color,
@@ -81,7 +73,6 @@ internal sealed class CLI(
         root.Add(glyphArg);
         root.Add(outputDirectoryArg);
         root.Add(colorOpt);
-        root.Add(imageSizeOpt);
         root.Add(formatOpt);
 
         root.SetAction(parseResult =>
@@ -90,7 +81,6 @@ internal sealed class CLI(
             string rawGlyphs = parseResult.GetValue(glyphArg)!;
             string outputDirectory = parseResult.GetValue(outputDirectoryArg)!;
             Color? color = parseResult.GetValue(colorOpt);
-            uint? imageSize = parseResult.GetValue(imageSizeOpt);
             ImmutableArray<MagickFormat>? imageFormats = parseResult.GetValue(formatOpt);
 
             if (!glyphParser.TryParse(rawGlyphs, out ImmutableArray<Glyph>? glyphs, out string? errorMessage, typeface))
@@ -99,13 +89,7 @@ internal sealed class CLI(
                 return;
             }
 
-            if (!imageSizeValidator.IsValid(imageSize, out errorMessage, imageFormats))
-            {
-                ConsoleHelpers.WriteError(errorMessage!);
-                return;
-            }
-
-            var context = new SessionContext(typeface, glyphs!.Value, outputDirectory, color!.Value, imageSize!.Value, imageFormats!.Value);
+            var context = new SessionContext(typeface, glyphs!.Value, outputDirectory, color!.Value, imageFormats!.Value);
             glyphProcessingOrchestrator.RenderAndSaveAllFromContext(context);
         });
 

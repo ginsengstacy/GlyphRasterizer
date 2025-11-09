@@ -11,12 +11,16 @@ namespace GlyphRasterizer.Rendering;
 
 public static class RenderingHelpers
 {
-    public static MagickImage RenderGlyph(Glyph glyph, GlyphTypeface typeface, Color color, uint imageSize)
+    public static MagickImage RenderGlyph(Glyph glyph, GlyphTypeface typeface, Color color)
     {
-        Geometry outline = GetGlyphOutline(glyph, typeface, imageSize);
-        TransformGroup transform = CreateCenteredTransform(outline, imageSize);
+        Geometry outline = GetGlyphOutline(glyph, typeface, AppConfig.MaxImageSize);
+        TransformGroup transform = CreateAutoFitTransform(outline);
         DrawingVisual visual = DrawGlyphVisual(outline, transform, color);
-        RenderTargetBitmap bitmap = RenderToBitmap(visual, (int)imageSize);
+
+        double totalPadding = AppConfig.Padding * 2;
+        int width = (int)Math.Ceiling(outline.Bounds.Width + totalPadding);
+        int height = (int)Math.Ceiling(outline.Bounds.Height + totalPadding);
+        RenderTargetBitmap bitmap = RenderToBitmap(visual, width, height);
 
         using var memoryStream = new MemoryStream();
         var encoder = new PngBitmapEncoder();
@@ -26,24 +30,29 @@ public static class RenderingHelpers
         return new MagickImage(memoryStream);
     }
 
-    public static TransformGroup CreateCenteredTransform(Geometry outline, uint imageSize)
+    private static Geometry GetGlyphOutline(Glyph glyph, GlyphTypeface typeface, double renderingEmSize)
+    {
+        return typeface.CharacterToGlyphMap.TryGetValue(glyph.CodePoint, out ushort glyphIndex)
+            ? typeface.GetGlyphOutline(glyphIndex, renderingEmSize, hintingEmSize: 1)
+            : throw new InvalidOperationException(ExceptionMessages.GlyphNotFound);
+    }
+
+    private static TransformGroup CreateAutoFitTransform(Geometry outline)
     {
         Rect bounds = outline.Bounds;
-        double scale = imageSize / Math.Max(bounds.Width, bounds.Height);
-        double offsetX = ((imageSize - (bounds.Width * scale)) / 2) - (bounds.X * scale);
-        double offsetY = ((imageSize - (bounds.Height * scale)) / 2) - (bounds.Y * scale);
+        double offsetX = -bounds.X + AppConfig.Padding;
+        double offsetY = -bounds.Y + AppConfig.Padding;
 
         return new TransformGroup
         {
             Children =
             {
-                new ScaleTransform(scale, scale),
                 new TranslateTransform(offsetX, offsetY)
             }
         };
     }
 
-    public static DrawingVisual DrawGlyphVisual(Geometry outline, Transform transform, Color color)
+    private static DrawingVisual DrawGlyphVisual(Geometry outline, Transform transform, Color color)
     {
         var visual = new DrawingVisual();
         var brush = new SolidColorBrush(color);
@@ -59,17 +68,9 @@ public static class RenderingHelpers
         return visual;
     }
 
-    private static Geometry GetGlyphOutline(Glyph glyph, GlyphTypeface font, uint imageSize)
+    private static RenderTargetBitmap RenderToBitmap(Visual visual, int width, int height)
     {
-        return font.CharacterToGlyphMap.TryGetValue(glyph.CodePoint, out ushort glyphIndex)
-            ? font.GetGlyphOutline(glyphIndex, imageSize, hintingEmSize: 1)
-            : throw new InvalidOperationException(ExceptionMessages.GlyphNotFound);
-    }
-
-    private static RenderTargetBitmap RenderToBitmap(Visual visual, int imageSize)
-    {
-        const double DPI = 96; // 1 WPF unit per pixel
-        var bitmap = new RenderTargetBitmap(imageSize, imageSize, DPI, DPI, AppConfig.PixelFormat);
+        var bitmap = new RenderTargetBitmap(width, height, AppConfig.Dpi, AppConfig.Dpi, AppConfig.PixelFormat);
         bitmap.Render(visual);
         bitmap.Freeze();
         return bitmap;

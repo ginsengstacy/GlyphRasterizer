@@ -140,7 +140,4 @@
   <data name="Restart" xml:space="preserve">
     <value>Restart process? (Y/N, Ctrl+Y = reuse previous font &amp; output directory)</value>
   </data>
-  <data name="Size_FormatString" xml:space="preserve">
-    <value>Enter image size ({0}-{1}px):</value>
-  </data>
 </root>

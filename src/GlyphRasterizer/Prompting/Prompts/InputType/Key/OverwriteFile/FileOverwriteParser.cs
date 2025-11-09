@@ -1,6 +1,4 @@
-﻿using GlyphRasterizer.Configuration;
-
-namespace GlyphRasterizer.Prompting.Prompts.InputType.Key.OverwriteFile;
+﻿namespace GlyphRasterizer.Prompting.Prompts.InputType.Key.OverwriteFile;
 
 public sealed class FileOverwriteParser : IPromptInputParser<ConsoleKeyInfo, FileOverwriteResult?>
 {

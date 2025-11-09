@@ -4,7 +4,6 @@ using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.GlyphColor;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormat;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.OutputDirectory;
-using System.Collections.Immutable;
 
 namespace GlyphRasterizer.Configuration;
 
@@ -18,13 +17,14 @@ public sealed class SessionContextFactory(
 {
     public SessionContext CreateDefault()
     {
-        ImmutableArray<IPrompt> promptOrder = ImmutableArray.Create<IPrompt>(
+        IPrompt[] promptOrder =
+        [
             fontPrompt,
             glyphPrompt,
             colorPrompt,
             imageFormatPrompt,
             outputDirectoryPrompt
-        );
+        ];
 
         return new SessionContext(promptOrder);
     }

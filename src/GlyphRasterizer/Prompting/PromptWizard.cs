@@ -4,7 +4,6 @@ using GlyphRasterizer.Prompting.Prompts.InputType.String.Font;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.OutputDirectory;
 using GlyphRasterizer.Terminal;
-using System.Collections.Immutable;
 
 namespace GlyphRasterizer.Prompting;
 
@@ -13,7 +12,7 @@ public sealed class PromptWizard(SessionContextFactory contextFactory)
     public SessionContext GetSessionContext(SessionContext? previousContext)
     {
         SessionContext currentContext = previousContext ?? contextFactory.CreateDefault();
-        ImmutableArray<IPrompt> promptOrder = currentContext.PromptOrder;
+        IPrompt[] promptOrder = currentContext.PromptOrder;
         int totalSteps = promptOrder.Length;
         int i = 0;
 
@@ -67,5 +66,6 @@ public sealed class PromptWizard(SessionContextFactory contextFactory)
     }
 
     private static bool ShouldSkipPrompt(SessionContext context, IPrompt prompt) => context.ShouldSkipFontAndOutputDirectoryPrompts
-                                                                                    && prompt is FontPrompt or OutputDirectoryPrompt;
+                                                                                    && prompt is FontPrompt 
+                                                                                              or OutputDirectoryPrompt;
 }

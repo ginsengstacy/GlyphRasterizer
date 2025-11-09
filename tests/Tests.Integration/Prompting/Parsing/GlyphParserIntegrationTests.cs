@@ -9,7 +9,7 @@ using Tests.Common.Prompting.Parsing;
 
 namespace Tests.Integration.Prompting.Parsing;
 
-public sealed class GlyphParserIntegrationTests : ParserTestBase<GlyphParser, string, ImmutableArray<Glyph>?>
+public sealed class GlyphParserIntegrationTests : ParserTestBase<GlyphParser, string, Glyph[]?>
 {
     protected override GlyphParser Parser { get; } = new();
 
@@ -107,7 +107,7 @@ public sealed class GlyphParserIntegrationTests : ParserTestBase<GlyphParser, st
     public void TryParse_Should_ReturnTrue_When_InputHasDuplicateGlyphs(string input)
     {
         Rune[] distinctRunes = [.. input.EnumerateRunes().Where(r => !Rune.IsWhiteSpace(r)).Distinct()];
-        ImmutableArray<Glyph> expectedGlyphs = [.. distinctRunes.Select(r => new Glyph(r.ToString()))];
+        Glyph[] expectedGlyphs = [.. distinctRunes.Select(r => new Glyph(r.ToString()))];
         AssertParseSuccess(input, expectedGlyphs, _unifont);
     }
 

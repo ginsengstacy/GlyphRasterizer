@@ -2,12 +2,11 @@
 using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormat;
 using ImageMagick;
 using Resources.Messages;
-using System.Collections.Immutable;
 using Tests.Common.Prompting.Parsing;
 
 namespace Tests.Unit.Prompting.Parsing;
 
-public sealed class ImageFormatParserUnitTests : ParserTestBase<ImageFormatParser, string, ImmutableArray<MagickFormat>?>
+public sealed class ImageFormatParserUnitTests : ParserTestBase<ImageFormatParser, string, MagickFormat[]?>
 {
     protected override ImageFormatParser Parser { get; } = new();
 
@@ -29,7 +28,7 @@ public sealed class ImageFormatParserUnitTests : ParserTestBase<ImageFormatParse
         }
     }
 
-    public static readonly TheoryData<string, ImmutableArray<MagickFormat>> ValidInput = new()
+    public static readonly TheoryData<string, MagickFormat[]> ValidInput = new()
         {
             { "PNG,JPEG", [MagickFormat.Png, MagickFormat.Jpeg] },     // multiple
             { "png,jpeg", [MagickFormat.Png, MagickFormat.Jpeg] },     // multiple + lowercase 
@@ -46,7 +45,7 @@ public sealed class ImageFormatParserUnitTests : ParserTestBase<ImageFormatParse
 
     [Theory]
     [MemberData(nameof(ValidInput))]
-    public void TryParse_Should_ReturnTrue_When_InputIsValid(string input, ImmutableArray<MagickFormat> expectedValue) =>
+    public void TryParse_Should_ReturnTrue_When_InputIsValid(string input, MagickFormat[] expectedValue) =>
         AssertParseSuccess(input, expectedValue);
 
     [Theory]

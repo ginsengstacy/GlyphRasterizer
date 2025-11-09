@@ -1,21 +1,16 @@
 ﻿using GlyphRasterizer.Configuration;
 using ImageMagick;
 using Resources.Messages;
-using System.Collections.Immutable;
 
 namespace GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormat;
 
-public sealed class ImageFormatParser : IPromptInputParser<string, ImmutableArray<MagickFormat>?>
+public sealed class ImageFormatParser : IPromptInputParser<string, MagickFormat[]?>
 {
-    public static readonly ImmutableDictionary<string, MagickFormat> _availableImageFormatNamesToValuesMap =
+    private static readonly Dictionary<string, MagickFormat> _availableImageFormatNamesToValuesMap =
         AppConfig.AvailableImageFormats
-            .ToImmutableDictionary(
-                f => Enum.GetName(f)!,
-                f => f,
-                StringComparer.OrdinalIgnoreCase
-            );
+            .ToDictionary(f => Enum.GetName(f)!, f => f, StringComparer.OrdinalIgnoreCase);
 
-    public bool TryParse(string input, out ImmutableArray<MagickFormat>? value, out string? errorMessage, object? additionalContext = null)
+    public bool TryParse(string input, out MagickFormat[]? value, out string? errorMessage, object? additionalContext = null)
     {
         if (string.IsNullOrWhiteSpace(input))
         {

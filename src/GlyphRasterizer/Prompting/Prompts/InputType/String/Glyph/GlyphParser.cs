@@ -1,14 +1,13 @@
 ﻿using Resources.Messages;
-using System.Collections.Immutable;
 using System.Globalization;
 using System.Text;
 using System.Windows.Media;
 
 namespace GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 
-public sealed class GlyphParser : IPromptInputParser<string, ImmutableArray<Glyph>?>
+public sealed class GlyphParser : IPromptInputParser<string, Glyph[]?>
 {
-    public bool TryParse(string input, out ImmutableArray<Glyph>? value, out string? errorMessage, object? additionalContext = null)
+    public bool TryParse(string input, out Glyph[]? value, out string? errorMessage, object? additionalContext = null)
     {
         if (string.IsNullOrWhiteSpace(input))
         {

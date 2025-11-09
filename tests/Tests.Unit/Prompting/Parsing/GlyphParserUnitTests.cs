@@ -1,12 +1,11 @@
 ﻿using GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 using Resources.Messages;
-using System.Collections.Immutable;
 using System.Windows.Media;
 using Tests.Common.Prompting.Parsing;
 
 namespace Tests.Unit.Prompting.Parsing;
 
-public sealed class GlyphParserUnitTests : ParserTestBase<GlyphParser, string, ImmutableArray<Glyph>?>
+public sealed class GlyphParserUnitTests : ParserTestBase<GlyphParser, string, Glyph[]?>
 {
     protected override GlyphParser Parser { get; } = new();
 

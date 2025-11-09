@@ -7,7 +7,6 @@ using GlyphRasterizer.Prompting.Prompts.InputType.String.ImageFormat;
 using GlyphRasterizer.Prompting.Prompts.InputType.String.OutputDirectory;
 using ImageMagick;
 using Resources.Messages;
-using System.Collections.Immutable;
 using System.CommandLine;
 using System.CommandLine.Parsing;
 using System.Windows.Media;
@@ -55,7 +54,7 @@ internal sealed class CLI(
             CustomParser = result => Parse(result, colorParser)
         };
 
-        var formatOpt = new Option<ImmutableArray<MagickFormat>?>("--format")
+        var formatOpt = new Option<MagickFormat[]?>("--format")
         {
             Description = string.Format(
                 CLIDescriptions.ImageFormat_FormatString,
@@ -81,15 +80,15 @@ internal sealed class CLI(
             string rawGlyphs = parseResult.GetValue(glyphArg)!;
             string outputDirectory = parseResult.GetValue(outputDirectoryArg)!;
             Color? color = parseResult.GetValue(colorOpt);
-            ImmutableArray<MagickFormat>? imageFormats = parseResult.GetValue(formatOpt);
+            MagickFormat[]? imageFormats = parseResult.GetValue(formatOpt);
 
-            if (!glyphParser.TryParse(rawGlyphs, out ImmutableArray<Glyph>? glyphs, out string? errorMessage, typeface))
+            if (!glyphParser.TryParse(rawGlyphs, out Glyph[]? glyphs, out string? errorMessage, typeface))
             {
                 ConsoleHelpers.WriteError(errorMessage!);
                 return;
             }
 
-            var context = new SessionContext(typeface, glyphs!.Value, outputDirectory, color!.Value, imageFormats!.Value);
+            var context = new SessionContext(typeface, glyphs!, outputDirectory, color!.Value, imageFormats!);
             glyphProcessingOrchestrator.RenderAndSaveAllFromContext(context);
         });
 

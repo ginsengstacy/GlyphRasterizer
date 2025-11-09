@@ -13,9 +13,6 @@
 ### Color
 - Can be specified using a named color (e.g., `Red`) or a hexadecimal code (e.g., `#FF0000`).
 
-### Image Size
-- Square image size in pixels between `16` and `2048`.
-
 ### Formats 
 - Output image format(s).  
   - **Single format**: `png`  
@@ -50,17 +47,16 @@ GlyphRasterizer.exe <font> <glyph> <output> [options]
 | Option               | Description                                    | Default |
 | -------------------- | ---------------------------------------------- | ------- |
 | `--color <color>`    | Color of the rendered glyph(s).                | `Black` |
-| `--size <int>`       | Square image size in pixels.                   | `256`   |
 | `--format <format>`  | Output image format(s).                        | `png`   |
 
 ---
 
 ### Examples
 
-Render a single character `A` as a **512×512 red JPEG**:
+Render a single glyph `A` as a **Red JPEG**:
 
 ```
-GlyphRasterizer.exe C:\Users\Alice\Fonts\Arial.ttf A C:\Users\Alice\Output --color Red --size 512 --format jpeg
+GlyphRasterizer.exe C:\Users\Alice\Fonts\Arial.ttf A C:\Users\Alice\Output --color Red --format jpeg
 ```
 
 Render multiple glyphs `ABC123` **without additional options**:
@@ -68,7 +64,7 @@ Render multiple glyphs `ABC123` **without additional options**:
 ```
 GlyphRasterizer.exe C:\Users\Alice\Fonts\Arial.ttf ABC123 C:\Users\Alice\Output
 ```
-> **Note:** Defaults to **Black**, **256x256** and **PNG**.
+> **Note:** Defaults to **Black PNG**.
 
 ---
 
@@ -86,7 +82,7 @@ GlyphRasterizer.exe
 
 the tool starts an interactive session that:
 
-1. Prompts you step-by-step for the required inputs (font, glyphs, formats, size, color, output directory).
+1. Prompts you step-by-step for the required inputs (font, glyphs, formats, color, output directory).
 2. Renders and saves the specified glyphs using your chosen settings.
 3. Displays interactive confirmation and error messages.
 4. Offers options to:
@@ -106,4 +102,4 @@ During an interactive session, you can enter the following commands at any promp
 
 ### Example Session
 
-<img width="1642" height="988" alt="ExampleGlyphRasterizerSession" src="https://github.com/user-attachments/assets/a081180e-8bc1-4e21-8873-9e3a77eda463" />
+<img width="1641" height="956" alt="Screenshot 2025-11-09 024754" src="https://github.com/user-attachments/assets/29fdc11d-bb44-48b3-9e49-2a45162afea6" />

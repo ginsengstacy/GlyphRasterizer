@@ -9,7 +9,7 @@ namespace GlyphRasterizer.Prompting.Prompts.InputType.String.Glyph;
 public sealed class GlyphPrompt(GlyphParser glyphParser, CommandTypeParser commandTypeParser)
     : PromptBase<string, ImmutableArray<Glyph>?>(commandTypeParser)
 {
-    protected override string Message => string.Format(PromptMessages.Glyph_FormatString, Environment.NewLine);
+    protected override string Message => PromptMessages.Glyph;
 
     protected override Func<string> GetInput => () => ConsoleHelpers.ReadLineSafe();
     protected override IPromptInputParser<string, ImmutableArray<Glyph>?> Parser { get; } = glyphParser;

@@ -120,17 +120,16 @@
   <data name="Color" xml:space="preserve">
     <value>Enter color as name (e.g., Red) or hexadecimal code (e.g., #FF0000):</value>
   </data>
-  <data name="FileAlreadyExists_FormatString" xml:space="preserve">
+  <data name="OverwriteFile_FormatString" xml:space="preserve">
     <value>{0} already exists. Overwrite? (Y/N, Ctrl+Y = yes to all, Ctrl+N = no to all)</value>
   </data>
   <data name="Font" xml:space="preserve">
     <value>Enter font path (e.g., C:\Users\Alice\Fonts\Arial.ttf):</value>
   </data>
-  <data name="Glyph_FormatString" xml:space="preserve">
-    <value>Enter glyph(s) (single: e.g., A; multiple: e.g., ABC).{0}Glyph(s):</value>
-    <comment>0 = \n</comment>
+  <data name="Glyph" xml:space="preserve">
+    <value>Enter glyph(s) (single: e.g., A; multiple: e.g., ABC). Glyph(s):</value>
   </data>
-  <data name="ImageFormat_FormatString" xml:space="preserve">
+  <data name="Format_FormatString" xml:space="preserve">
     <value>Enter image format(s) (single: e.g., {0}; multiple: e.g., {0}, {1}).{2}Available: {3}{4}Format(s):</value>
     <comment>2,4 = \n</comment>
   </data>

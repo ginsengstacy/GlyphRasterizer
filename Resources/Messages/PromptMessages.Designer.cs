@@ -70,15 +70,6 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} already exists. Overwrite? (Y/N, Ctrl+Y = yes to all, Ctrl+N = no to all).
-        /// </summary>
-        public static string FileAlreadyExists_FormatString {
-            get {
-                return ResourceManager.GetString("FileAlreadyExists_FormatString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Enter font path (e.g., C:\Users\Alice\Fonts\Arial.ttf):.
         /// </summary>
         public static string Font {
@@ -88,20 +79,20 @@ namespace Resources.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter glyph(s) (single: e.g., A; multiple: e.g., ABC).{0}Glyph(s):.
+        ///   Looks up a localized string similar to Enter image format(s) (single: e.g., {0}; multiple: e.g., {0}, {1}).{2}Available: {3}{4}Format(s):.
         /// </summary>
-        public static string Glyph_FormatString {
+        public static string Format_FormatString {
             get {
-                return ResourceManager.GetString("Glyph_FormatString", resourceCulture);
+                return ResourceManager.GetString("Format_FormatString", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter image format(s) (single: e.g., {0}; multiple: e.g., {0}, {1}).{2}Available: {3}{4}Format(s):.
+        ///   Looks up a localized string similar to Enter glyph(s) (single: e.g., A; multiple: e.g., ABC). Glyph(s):.
         /// </summary>
-        public static string ImageFormat_FormatString {
+        public static string Glyph {
             get {
-                return ResourceManager.GetString("ImageFormat_FormatString", resourceCulture);
+                return ResourceManager.GetString("Glyph", resourceCulture);
             }
         }
         
@@ -111,6 +102,15 @@ namespace Resources.Messages {
         public static string OutputDirectory {
             get {
                 return ResourceManager.GetString("OutputDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} already exists. Overwrite? (Y/N, Ctrl+Y = yes to all, Ctrl+N = no to all).
+        /// </summary>
+        public static string OverwriteFile_FormatString {
+            get {
+                return ResourceManager.GetString("OverwriteFile_FormatString", resourceCulture);
             }
         }
         

@@ -14,7 +14,7 @@ public sealed class ImageFormatPrompt(ImageFormatParser imageFormatParser, Comma
 
     protected override string Message =>
         string.Format(
-            PromptMessages.ImageFormat_FormatString,
+            PromptMessages.Format_FormatString,
             _imageFormatNames[0],
             _imageFormatNames[1],
             Environment.NewLine,

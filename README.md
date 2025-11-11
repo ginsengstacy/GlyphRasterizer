@@ -8,7 +8,7 @@
   - **Single character**: `"A"`  
   - **Multiple characters**: `"ABC123"`
 
-> **Note:** Each character in a multi-character string is rendered as a separate image file. Any Unicode character can be used as a glyph and is saved as **Glyph_{UnicodeLabel}** (e.g., **Glyph_U+0041** for `A`). 
+> **Note:** Each character in a multi-character string is rendered as a separate image file. Any Unicode character can be used as a glyph and is saved as **Glyph_{UnicodeLabel}** (e.g., **Glyph_U+4E2D** for `中`). 
 
 ### Color
 - Can be specified using a named color (e.g., `Red`) or a hexadecimal code (e.g., `#FF0000`).

@@ -8,7 +8,7 @@
   - **Single character**: `"A"`  
   - **Multiple characters**: `"ABC123"`
 
-> **Note:** Each character in a multi-character string is rendered as a separate image file. Any Unicode character can be used as a glyph and is saved as **Glyph_{UnicodeLabel}** (e.g., **Glyph_U+0041** for `A`). 
+> **Note:** Each character in a multi-character string is rendered as a separate image file. Any Unicode character can be used as a glyph and is saved as **Glyph_{UnicodeLabel}** (e.g., **Glyph_U+4E2D** for `中`). 
 
 ### Color
 - Can be specified using a named color (e.g., `Red`) or a hexadecimal code (e.g., `#FF0000`).
@@ -20,7 +20,7 @@
   - **Supported formats**: `png`, `jpeg`, `webp`, `tiff`, `ico`, `avif`, `bmp`, `psd`, `pcx`, `tga`, `pnm`
     
 ### Background
-- Background is transparent by default.
+- Transparent by default.
 - When an output format does not support alpha, the image is automatically flattened to a white background.
 - Formats without transparency include: `jpeg`, `avif`, `pcx`, `pnm`
 
@@ -84,15 +84,15 @@ the tool starts an interactive session that:
 
 1. Prompts you step-by-step for the required inputs (font, glyphs, formats, color, output directory).
 2. Renders and saves the specified glyphs using your chosen settings.
-3. Displays interactive confirmation and error messages.
+3. Displays confirmation and error messages.
 4. Offers options to:
 
-   * **Restart with previous settings** — quickly re-run with the same font and output directory.
-   * **Restart from scratch** — discard previous input and start over.
+   * **Restart with previous settings**; quickly re-run with the same font and output directory.
+   * **Restart from scratch**; discard previous input and start over.
 
 ### Commands
 
-During an interactive session, you can enter the following commands at any prompt to control the session flow:
+During an interactive session, you can enter the following commands at any prompt:
 
 | Command     | Description                                   |                            
 | ----------- | --------------------------------------------- |

@@ -15,10 +15,11 @@ public sealed class ImageFormatParserUnitTests : ParserTestBase<ImageFormatParse
 
     [Theory]
     [MemberData(nameof(EmptyStringInput))]
-    public void TryParse_Should_ReturnEmptyInputError_When_InputIsEmpty(string input) => AssertParseFailure(input, ErrorMessages.EmptyInput);
+    public void TryParse_ShouldFailWithReturnEmptyInputMessage_WhenInputIsEmpty(string input) => 
+        AssertParseFailure(input, ErrorMessages.EmptyInput);
 
     [Fact]
-    public void TryParse_Should_ReturnTrue_When_InputIsEachFormat()
+    public void TryParse_ShouldSucceed_WhenInputIsEveryAvailableFormat()
     {
         foreach (MagickFormat format in AppConfig.AvailableImageFormats)
         {
@@ -28,27 +29,42 @@ public sealed class ImageFormatParserUnitTests : ParserTestBase<ImageFormatParse
         }
     }
 
-    public static readonly TheoryData<string, MagickFormat[]> ValidInput = new()
-        {
-            { "PNG,JPEG", [MagickFormat.Png, MagickFormat.Jpeg] },     // multiple
-            { "png,jpeg", [MagickFormat.Png, MagickFormat.Jpeg] },     // multiple + lowercase 
-            { " PNG , JPEG ", [MagickFormat.Png, MagickFormat.Jpeg] }, // multiple + extra whitespace
-            { "PNG,PNG", [MagickFormat.Png] }                          // duplicate input token
-        };
+    public static readonly TheoryData<string, MagickFormat[]> SingleAvailableFormat = new()
+    {
+        { "PNG", [MagickFormat.Png] },
+        { "PNG,PNG", [MagickFormat.Png] } // duplicate input token
+    };
 
-    public static readonly TheoryData<string> InvalidInput = new()
-        {
-            { InvalidImageFormat },
-            { $"{AppConfig.AvailableImageFormats.FirstOrDefault()},{InvalidImageFormat}" },    // valid + invalid
-            { $" {AppConfig.AvailableImageFormats.FirstOrDefault()} , {InvalidImageFormat} " } // valid + invalid + extra whitespace
-        };
+    public static readonly TheoryData<string, MagickFormat[]> MultipleAvailableFormats = new()
+    {
+        { "PNG,JPEG", [MagickFormat.Png, MagickFormat.Jpeg] },     
+        { "png,jpeg", [MagickFormat.Png, MagickFormat.Jpeg] },     // lowercase 
+        { " PNG , JPEG ", [MagickFormat.Png, MagickFormat.Jpeg] }, // extra whitespace
+        { "PNG,PNG,JPEG", [MagickFormat.Png, MagickFormat.Jpeg] }  // duplicate input token
+    };
+
+    public static readonly TheoryData<string> AvailableImageFormatsMixedWithInvalidImageFormat = new()
+    {
+        { $"{AppConfig.AvailableImageFormats.FirstOrDefault()},{InvalidImageFormat}" },   
+        { $" {AppConfig.AvailableImageFormats.FirstOrDefault()} , {InvalidImageFormat} " } // extra whitespace
+    };
 
     [Theory]
-    [MemberData(nameof(ValidInput))]
-    public void TryParse_Should_ReturnTrue_When_InputIsValid(string input, MagickFormat[] expectedValue) =>
+    [MemberData(nameof(SingleAvailableFormat))]
+    public void TryParse_ShouldSucceed_WhenInputIsSingleAvailableFormat(string input, MagickFormat[] expectedValue) =>
         AssertParseSuccess(input, expectedValue);
 
     [Theory]
-    [MemberData(nameof(InvalidInput))]
-    public void TryParse_Should_ReturnInvalidFormatsError_When_InputIsInvalid(string input) => AssertParseFailure(input, _invalidFormatsErrorMessage);
+    [MemberData(nameof(MultipleAvailableFormats))]
+    public void TryParse_ShouldSucceed_WhenInputIsMultipleAvailableFormats(string input, MagickFormat[] expectedValue) =>
+        AssertParseSuccess(input, expectedValue);
+
+    [Fact]
+    public void TryParse_ShouldFailWithInvalidFormatsMessage_WhenInputIsSingleInvalidImageFormat() => 
+        AssertParseFailure(InvalidImageFormat, _invalidFormatsErrorMessage);
+
+    [Theory]
+    [MemberData(nameof(AvailableImageFormatsMixedWithInvalidImageFormat))]
+    public void TryParse_ShouldFailWithInvalidFormatsMessage_WhenInputMixesAvailableAndInvalidImageFormats(string input) =>
+        AssertParseFailure(input, _invalidFormatsErrorMessage);
 }

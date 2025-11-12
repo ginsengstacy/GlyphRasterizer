@@ -13,7 +13,8 @@ public sealed class StringExtensionUnitTests
     [InlineData("foo bar foo bar", "foo {x} foo {y}")]               // repeated literals
     [InlineData("anything", "{any}")]                                // only placeholders
     [InlineData("anything", "")]                                     // empty format
-    public void MatchesFormat_Should_ReturnTrue_When_LiteralsMatchInOrder(string actual, string format) => actual.MatchesFormat(format).Should().BeTrue();
+    public void MatchesFormat_ShouldReturnTrue_WhenLiteralsMatchInOrder(string actual, string format) => 
+        actual.MatchesFormat(format).Should().BeTrue();
 
     [Theory]
     [InlineData("Hello John", "Hello {firstName} {lastName}")] // missing part
@@ -21,15 +22,16 @@ public sealed class StringExtensionUnitTests
     [InlineData("second first", "first {something} second")]   // wrong order
     [InlineData("", "Hello {name}")]                           // empty actual
     [InlineData("Hello World", "hello {something}")]           // case sensitive
-    public void MatchesFormat_Should_ReturnFalse_When_LiteralsDoNotMatch(string actual, string format) => actual.MatchesFormat(format).Should().BeFalse();
+    public void MatchesFormat_ShouldReturnFalse_WhenLiteralsDoNotMatchInOrder(string actual, string format) => 
+        actual.MatchesFormat(format).Should().BeFalse();
 
     [Fact]
-    public void MatchesFormat_Should_ThrowNullReference_When_ActualIsNull() =>
+    public void MatchesFormat_ShouldThrowNullReference_WhenActualIsNull() =>
         FluentActions.Invoking(() => ((string?)null)!.MatchesFormat("format"))
             .Should().Throw<NullReferenceException>();
 
     [Fact]
-    public void MatchesFormat_Should_ThrowArgumentNull_When_FormatIsNull() =>
+    public void MatchesFormat_ShouldThrowArgumentNull_WhenFormatIsNull() =>
         FluentActions.Invoking(() => "actual".MatchesFormat(null!))
             .Should().Throw<ArgumentNullException>();
 }

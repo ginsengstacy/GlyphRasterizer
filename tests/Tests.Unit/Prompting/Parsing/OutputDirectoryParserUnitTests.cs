@@ -10,5 +10,17 @@ public sealed class OutputDirectoryParserUnitTests : ParserTestBase<OutputDirect
 
     [Theory]
     [MemberData(nameof(EmptyStringInput))]
-    public void TryParse_Should_ReturnEmptyInputError_When_InputIsEmpty(string input) => AssertParseFailure(input, ErrorMessages.EmptyInput);
+    public void TryParse_ShouldFailWithEmptyInputMessage_WhenInputIsEmpty(string input) =>
+        AssertParseFailure(input, ErrorMessages.EmptyInput);
+
+    [Theory]
+    [InlineData("C:\\FolderName\\SubfolderName")]
+    public void TryParse_ShouldSucceed_WhenInputIsNotEmpty(string input) =>
+        AssertParseSuccess(input, input);
+
+    [Theory]
+    [InlineData("\"C:\\FolderName\\SubfolderName\"", "C:\\FolderName\\SubfolderName")] // extra quotation mark
+    [InlineData("\"C:\\FolderName\\SubfolderName\\\"", "C:\\FolderName\\SubfolderName")] // trailing backslash
+    public void TryParse_ShouldReturnTrimmedOutputDirectory_WhenInputNeedsToBeTrimmed(string input, string expected) =>
+        AssertParseSuccess(input, expected);
 }

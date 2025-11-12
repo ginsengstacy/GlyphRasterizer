@@ -12,7 +12,7 @@ public sealed class FileOverwriteParserUnitTests : ParserTestBase<FileOverwriteP
     [InlineData(ConsoleKey.Y, true, OverwriteMode.OverwriteAll, true)]
     [InlineData(ConsoleKey.N, false, OverwriteMode.AskAgain, false)]
     [InlineData(ConsoleKey.N, true, OverwriteMode.SkipAll, false)]
-    public void TryParse_Should_ReturnTrue_When_InputIsValid(ConsoleKey key, bool ctrl, OverwriteMode expectedMode, bool expectedShouldSave)
+    public void TryParse_ShouldSucceed_WhenInputKeyIsMapped(ConsoleKey key, bool ctrl, OverwriteMode expectedMode, bool expectedShouldSave)
     {
         var input = new ConsoleKeyInfo(' ', key, shift: false, alt: false, control: ctrl);
         var expectedResult = new FileOverwriteResult(expectedMode, expectedShouldSave);
@@ -23,7 +23,7 @@ public sealed class FileOverwriteParserUnitTests : ParserTestBase<FileOverwriteP
     [InlineData(ConsoleKey.A)]
     [InlineData(ConsoleKey.Enter)]
     [InlineData(ConsoleKey.Escape)]
-    public void TryParse_Should_ReturnFalse_When_InputIsInvalid(ConsoleKey key)
+    public void TryParse_ShouldFail_WhenInputKeyIsNotMapped(ConsoleKey key)
     {
         var input = new ConsoleKeyInfo(' ', key, shift: false, alt: false, control: false);
         AssertParseFailure(input, null!);

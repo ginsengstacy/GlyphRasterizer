@@ -11,6 +11,6 @@ public sealed class GlyphParserUnitTests : ParserTestBase<GlyphParser, string, G
 
     [Theory]
     [MemberData(nameof(EmptyStringInput))]
-    public void TryParse_Should_ReturnEmptyInputError_When_InputIsEmpty(string input) =>
+    public void TryParse_ShouldFailWithEmptyInputMessage_WhenInputIsEmpty(string input) => 
         AssertParseFailure(input, ErrorMessages.EmptyInput, new GlyphTypeface());
 }

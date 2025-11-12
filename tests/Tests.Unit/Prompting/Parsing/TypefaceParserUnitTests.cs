@@ -12,8 +12,10 @@ public sealed class TypefaceParserUnitTests : ParserTestBase<TypefaceParser, str
 
     [Theory]
     [MemberData(nameof(EmptyStringInput))]
-    public void TryParse_Should_ReturnEmptyInputError_When_InputIsEmpty(string input) => AssertParseFailure(input, ErrorMessages.EmptyInput);
+    public void TryParse_ShouldFailWithEmptyInputMessage_WhenInputIsEmpty(string input) =>
+        AssertParseFailure(input, ErrorMessages.EmptyInput);
 
     [Fact]
-    public void TryParse_Should_ReturnPathNotFoundError_When_PathDoesNotExist() => AssertParseFailure(Path.GetRandomFileName(), ErrorMessages.PathNotFound);
+    public void TryParse_ShouldFailWithPathNotFoundMessage_WhenPathDoesNotExist() => 
+        AssertParseFailure(Path.GetRandomFileName(), ErrorMessages.PathNotFound);
 }

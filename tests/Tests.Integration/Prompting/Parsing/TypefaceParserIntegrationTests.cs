@@ -23,10 +23,11 @@ public sealed class TypefaceParserIntegrationTests : ParserTestBase<TypefacePars
 
     [Theory]
     [MemberData(nameof(ExistingValidFontPath))]
-    public void TryParse_Should_ReturnTrue_When_FontPathIsValid(string fontPath) => AssertParseSuccess(fontPath, _unifont);
+    public void TryParse_ShouldSucceed_WhenFontPathExists(string fontPath) => 
+        AssertParseSuccess(fontPath, _unifont);
 
     [Fact]
-    public void TryParse_Should_ReturnFailedToLoadError_When_GlyphTypefaceCannotBeLoaded()
+    public void TryParse_ShouldFailWithFailedToLoadMessage_WhenGlyphTypefaceCannotBeLoaded()
     {
         string tmpPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".ttf");
 

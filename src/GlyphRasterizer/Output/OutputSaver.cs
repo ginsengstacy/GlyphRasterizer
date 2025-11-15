@@ -10,8 +10,8 @@ namespace GlyphRasterizer.Output;
 
 internal sealed class OutputSaver(OverwriteDecisionService overwriteDecisionService)
 {
-    private static readonly ImmutableHashSet<MagickFormat> _formatsSupportingAlpha =
-        ImmutableHashSet.Create(
+    private static readonly ImmutableArray<MagickFormat> _formatsSupportingAlpha =
+        ImmutableArray.Create(
             MagickFormat.Png,
             MagickFormat.WebP,
             MagickFormat.Tiff,
